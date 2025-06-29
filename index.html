@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Solanki - Project Coordinator & Business Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card.healthcare {
+            border-left-color: #e74c3c;
+        }
+
+        .project-card.manufacturing {
+            border-left-color: #f39c12;
+        }
+
+        .project-card.energy {
+            border-left-color: #27ae60;
+        }
+
+        .project-card.ecommerce {
+            border-left-color: #9b59b6;
+        }
+
+        .project-card.technology {
+            border-left-color: #3498db;
+        }
+
+        .project-card.financial {
+            border-left-color: #34495e;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .healthcare-tag { background: #fee; color: #e74c3c; }
+        .manufacturing-tag { background: #fef5e7; color: #f39c12; }
+        .energy-tag { background: #eafaf1; color: #27ae60; }
+        .ecommerce-tag { background: #f4ecf7; color: #9b59b6; }
+        .technology-tag { background: #ebf3fd; color: #3498db; }
+        .financial-tag { background: #eaecee; color: #34495e; }
+
+        .project-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 5px 0;
+            color: #7f8c8d;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header .stats {
+                gap: 20px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 5px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Amit Solanki</h1>
+            <div class="subtitle">Project Coordinator & Post-Sales Business Analyst</div>
+            <p style="color: #7f8c8d; margin: 20px 0;">Transforming client requirements into digital solutions across diverse industries</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">90+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+            <h2>Project Portfolio</h2>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <button class="filter-btn" onclick="filterProjects('healthcare')">Healthcare</button>
+                <button class="filter-btn" onclick="filterProjects('manufacturing')">Manufacturing</button>
+                <button class="filter-btn" onclick="filterProjects('energy')">Energy</button>
+                <button class="filter-btn" onclick="filterProjects('ecommerce')">E-commerce</button>
+                <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
+                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Healthcare Projects -->
+                <div class="project-card healthcare">
+                    <div class="project-title">Octapharma Plasma</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Comprehensive plasma donation management platform with patient scheduling, donor tracking, and compliance reporting. Implemented HIPAA-compliant workflows and multi-location coordination.
+                    </div>
+                    <a href="https://www.octapharmaplasma.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card healthcare">
+                    <div class="project-title">Advanced Reconstruction Institute</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Multi-site medical practice platform with specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network integration.
+                    </div>
+                    <a href="https://www.advancedreconstruction.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card healthcare">
+                    <div class="project-title">Ridgeline Health Group</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Healthcare provider platform featuring patient portal integration, appointment scheduling, and medical records management with seamless provider-patient communication.
+                    </div>
+                    <a href="https://www.ridgelinehealthgroup.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <!-- Manufacturing Projects -->
+                <div class="project-card manufacturing">
+                    <div class="project-title">Door Systems</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Industrial door solutions platform with service management, technical specifications database, and B2B ordering system for commercial and industrial applications.
+                    </div>
+                    <a href="https://www.doorsystems.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card manufacturing">
+                    <div class="project-title">4Sale Heavy Equipment</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Heavy machinery marketplace with advanced inventory management, equipment specifications, and dealer network integration for construction and industrial equipment.
+                    </div>
+                    <a href="https://www.4saleheavyequipment.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card manufacturing">
+                    <div class="project-title">Aeris Compressor Parts</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Specialized industrial parts catalog and ordering system with technical documentation, compatibility matching, and supply chain integration.
+                    </div>
+                    <a href="https://aeriscompressorparts.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <!-- Energy Projects -->
+                <div class="project-card energy">
+                    <div class="project-title">Hellio Energy Ecosystem</div>
+                    <span class="project-category energy-tag">Energy</span>
+                    <div class="project-description">
+                        Comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.
+                    </div>
+                    <a href="https://www.hellio.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card energy">
+                    <div class="project-title">Akea Energies</div>
+                    <span class="project-category energy-tag">Energy</span>
+                    <div class="project-description">
+                        Renewable energy consultation platform with project planning tools, energy auditing capabilities, and sustainability reporting for commercial and residential clients.
+                    </div>
+                    <a href="https://www.akea-energies.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <!-- E-commerce Projects -->
+                <div class="project-card ecommerce">
+                    <div class="project-title">MJ Wholesale</div>
+                    <span class="project-category ecommerce-tag">E-commerce</span>
+                    <div class="project-description">
+                        Multi-vendor wholesale distribution platform with inventory management, bulk pricing structures, and B2B customer portal for efficient order processing.
+                    </div>
+                    <a href="https://mjwholesale.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card ecommerce">
+                    <div class="project-title">Beast Branding</div>
+                    <span class="project-category ecommerce-tag">E-commerce</span>
+                    <div class="project-description">
+                        Custom merchandise and branding solutions platform with design tools, product customization, and fulfillment integration for businesses and individuals.
+                    </div>
+                    <a href="https://beastbranding.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <!-- Technology Projects -->
+                <div class="project-card technology">
+                    <div class="project-title">Mail Manager</div>
+                    <span class="project-category technology-tag">Technology</span>
+                    <div class="project-description">
+                        Advanced email management and organization platform with intelligent sorting, collaboration tools, and productivity features for professional communication.
+                    </div>
+                    <a href="https://www.mailmanager.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card technology">
+                    <div class="project-title">Nexford University</div>
+                    <span class="project-category technology-tag">Technology</span>
+                    <div class="project-description">
+                        Educational technology platform with learning management system, student tracking, and interactive course delivery for online higher education.
+                    </div>
+                    <a href="https://nexford.edu/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <!-- Financial Projects -->
+                <div class="project-card financial">
+                    <div class="project-title">FocusCFO</div>
+                    <span class="project-category financial-tag">Financial</span>
+                    <div class="project-description">
+                        Financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities for growing businesses.
+                    </div>
+                    <a href="https://www.focuscfo.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card financial">
+                    <div class="project-title">Tax Advisory Partnership</div>
+                    <span class="project-category financial-tag">Financial</span>
+                    <div class="project-description">
+                        Tax consultation and compliance platform with automated workflows, document management, and client communication tools for professional tax services.
+                    </div>
+                    <a href="https://www.taxadvisorypartnership.com/" class="project-link" target="_blank">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Core Competencies</h2>
+            <div class="skills-section">
+                <div class="skill-category">
+                    <h3>Business Analysis</h3>
+                    <ul class="skill-list">
+                        <li>Requirements Gathering & Documentation</li>
+                        <li>Stakeholder Management</li>
+                        <li>Process Analysis & Optimization</li>
+                        <li>Technical Specification Writing</li>
+                        <li>User Story Creation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Project Management</h3>
+                    <ul class="skill-list">
+                        <li>End-to-End Project Coordination</li>
+                        <li>Timeline Estimation & Planning</li>
+                        <li>Cross-functional Team Leadership</li>
+                        <li>Client Communication & Reporting</li>
+                        <li>Quality Assurance Coordination</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Design & Development</h3>
+                    <ul class="skill-list">
+                        <li>Figma Design & Prototyping</li>
+                        <li>UI/UX Design Principles</li>
+                        <li>Responsive Web Design</li>
+                        <li>Development Team Collaboration</li>
+                        <li>User Experience Testing</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Industry Expertise</h3>
+                    <ul class="skill-list">
+                        <li>Healthcare & HIPAA Compliance</li>
+                        <li>E-commerce & B2B Platforms</li>
+                        <li>Manufacturing & Industrial Solutions</li>
+                        <li>Energy & Sustainability Systems</li>
+                        <li>Financial Services & Security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Let's Connect</h2>
+            <div class="contact-info">📧 amit.solanki0987@gmail.com</div>
+            <div class="contact-info">📱 +91 9601875084</div>
+            <div class="contact-info">📍 Ahmedabad, Gujarat, India</div>
+            <div class="contact-info">💼 LinkedIn: https://in.linkedin.com/in/amit-solanki-7547581a7</div>
+        </div>
+    </div>
+
+    <script>
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
