@@ -1,36 +1,60 @@
 // /project.js
 
-const slug = new URLSearchParams(window.location.search).get('slug');
 
 const baseId = "app7912tAjdpdGLv6";
 const tableName = "Portfolio Projects"; // replace with your actual table name
 const token = "pat6yR5CxXZKwu8JI.59c985248fbcf58aab50c7034e85072f1e674163507b07090d1757127c802f51";
 
-fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={Slug}='${slug}'`, {
+ // index.js
+
+
+const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+
+const grid = document.getElementById("project-grid");
+const modal = document.getElementById("project-modal");
+const closeModal = document.querySelector(".close");
+
+// Fill modal function
+function fillModal(project) {
+  document.getElementById("modal-name").textContent = project.Name;
+  document.getElementById("modal-banner").src = project.Banner?.[0]?.url || '';
+  document.getElementById("modal-about").textContent = project.About || '';
+  document.getElementById("modal-challenges").textContent = project.Challenges || '';
+  document.getElementById("modal-solutions").textContent = project.Solutions || '';
+  document.getElementById("modal-duration").textContent = project.Duration || '';
+  document.getElementById("modal-contribution").textContent = project.Contribution || '';
+  document.getElementById("modal-tools").textContent = project.Tools || '';
+  document.getElementById("modal-link").href = project["Live Link"] || '#';
+  modal.style.display = "flex";
+}
+
+// Close modal
+closeModal.onclick = () => modal.style.display = "none";
+window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+fetch(endpoint, {
   headers: {
     Authorization: `Bearer ${token}`
   }
 })
 .then(res => res.json())
 .then(data => {
-  if (data.records.length === 0) {
-    document.getElementById("project-container").innerHTML = `<p>Project not found.</p>`;
-    return;
-  }
+  data.records.forEach(record => {
+    const p = record.fields;
 
-  const p = data.records[0].fields;
+    // Create each card
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.innerHTML = `
+      <img src="${p.Banner?.[0]?.url || ''}" alt="${p.Name}" style="width:100%;">
+      <h3>${p.Name}</h3>
+    `;
 
-  document.getElementById("project-name").textContent = p.Name;
-  document.getElementById("project-banner").src = p.Banner[0]?.url || "";
-  document.getElementById("about").textContent = p.About || "";
-  document.getElementById("challenges").textContent = p.Challenges || "";
-  document.getElementById("solutions").textContent = p.Solutions || "";
-  document.getElementById("duration").textContent = p.Duration || "";
-  document.getElementById("contribution").textContent = p.Contribution || "";
-  document.getElementById("tools").textContent = p.Tools || "";
-  document.getElementById("live-link").href = p["Live Link"] || "#";
+    card.onclick = () => fillModal(p);
+    grid.appendChild(card);
+  });
 })
 .catch(err => {
-  console.error("Error loading project:", err);
-  document.getElementById("project-container").innerHTML = `<p>Error loading project.</p>`;
+  grid.innerHTML = "<p>Error loading projects.</p>";
+  console.error("Error:", err);
 });
