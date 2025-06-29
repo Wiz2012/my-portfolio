@@ -1,60 +1,62 @@
-// /project.js
+// project.js
 
+const projects = [
+  {
+    name: "Octapharma Plasma",
+    banner: "https://via.placeholder.com/600x300?text=Octapharma+Plasma",
+    about: "Plasma donation management platform.",
+    challenges: "HIPAA compliance, multi-location scheduling",
+    solutions: "Secure workflows, donor data handling",
+    duration: "6 months",
+    contribution: "Requirement analysis, QA planning",
+    tools: "Figma, Jira, Confluence",
+    link: "https://www.octapharmaplasma.com/"
+  },
+  {
+    name: "MJ Wholesale",
+    banner: "https://via.placeholder.com/600x300?text=MJ+Wholesale",
+    about: "Multi-vendor wholesale e-commerce platform.",
+    challenges: "Inventory syncing, B2B flow",
+    solutions: "Custom pricing tiers, partner portals",
+    duration: "4 months",
+    contribution: "Wireframes, Dev communication, Testing",
+    tools: "Figma, Trello, Slack",
+    link: "https://mjwholesale.com/"
+  }
+];
 
-const baseId = "app7912tAjdpdGLv6";
-const tableName = "Portfolio Projects"; // replace with your actual table name
-const token = "pat6yR5CxXZKwu8JI.59c985248fbcf58aab50c7034e85072f1e674163507b07090d1757127c802f51";
+const grid = document.getElementById("projectGrid");
+const modal = document.getElementById("projectModal");
+const closeBtn = document.getElementById("modalClose");
 
- // index.js
+// Fill modal with project data
+function openModal(project) {
+  document.getElementById("modalTitle").textContent = project.name;
+  document.getElementById("modalBanner").src = project.banner;
+  document.getElementById("modalAbout").textContent = project.about;
+  document.getElementById("modalChallenges").textContent = project.challenges;
+  document.getElementById("modalSolutions").textContent = project.solutions;
+  document.getElementById("modalDuration").textContent = project.duration;
+  document.getElementById("modalContribution").textContent = project.contribution;
+  document.getElementById("modalTools").textContent = project.tools;
+  document.getElementById("modalLink").href = project.link;
 
-
-const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
-
-const grid = document.getElementById("project-grid");
-const modal = document.getElementById("project-modal");
-const closeModal = document.querySelector(".close");
-
-// Fill modal function
-function fillModal(project) {
-  document.getElementById("modal-name").textContent = project.Name;
-  document.getElementById("modal-banner").src = project.Banner?.[0]?.url || '';
-  document.getElementById("modal-about").textContent = project.About || '';
-  document.getElementById("modal-challenges").textContent = project.Challenges || '';
-  document.getElementById("modal-solutions").textContent = project.Solutions || '';
-  document.getElementById("modal-duration").textContent = project.Duration || '';
-  document.getElementById("modal-contribution").textContent = project.Contribution || '';
-  document.getElementById("modal-tools").textContent = project.Tools || '';
-  document.getElementById("modal-link").href = project["Live Link"] || '#';
   modal.style.display = "flex";
 }
 
-// Close modal
-closeModal.onclick = () => modal.style.display = "none";
-window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
-
-fetch(endpoint, {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-})
-.then(res => res.json())
-.then(data => {
-  data.records.forEach(record => {
-    const p = record.fields;
-
-    // Create each card
-    const card = document.createElement("div");
-    card.className = "project-card";
-    card.innerHTML = `
-      <img src="${p.Banner?.[0]?.url || ''}" alt="${p.Name}" style="width:100%;">
-      <h3>${p.Name}</h3>
-    `;
-
-    card.onclick = () => fillModal(p);
-    grid.appendChild(card);
-  });
-})
-.catch(err => {
-  grid.innerHTML = "<p>Error loading projects.</p>";
-  console.error("Error:", err);
+// Render all project cards
+projects.forEach(p => {
+  const card = document.createElement("div");
+  card.className = "project-card";
+  card.innerHTML = `
+    <img src="${p.banner}" alt="${p.name}" />
+    <h3>${p.name}</h3>
+    <p>${p.about}</p>
+  `;
+  card.addEventListener("click", () => openModal(p));
+  grid.appendChild(card);
 });
+
+// Close modal events
+closeBtn.onclick = () => modal.style.display = "none";
+window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
