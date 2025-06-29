@@ -3,24 +3,24 @@
 const projects = [
   {
     name: "Octapharma Plasma",
+    category: "healthcare",
     banner: "https://via.placeholder.com/600x300?text=Octapharma+Plasma",
-    about: "Plasma donation management platform.",
-    challenges: "HIPAA compliance, multi-location scheduling",
-    solutions: "Secure workflows, donor data handling",
+    about: "Plasma donation platform with HIPAA compliance.",
+    challenges: "Complex scheduling, regulation compliance",
+    solutions: "HIPAA-compliant modules, donor tracking",
     duration: "6 months",
-    contribution: "Requirement analysis, QA planning",
-    tools: "Figma, Jira, Confluence",
+    contribution: "Requirement gathering, testing",
     link: "https://www.octapharmaplasma.com/"
   },
   {
     name: "MJ Wholesale",
+    category: "ecommerce",
     banner: "https://via.placeholder.com/600x300?text=MJ+Wholesale",
-    about: "Multi-vendor wholesale e-commerce platform.",
-    challenges: "Inventory syncing, B2B flow",
-    solutions: "Custom pricing tiers, partner portals",
+    about: "B2B wholesale marketplace for inventory management.",
+    challenges: "Bulk orders, vendor system",
+    solutions: "Custom modules, portal integration",
     duration: "4 months",
-    contribution: "Wireframes, Dev communication, Testing",
-    tools: "Figma, Trello, Slack",
+    contribution: "UI collaboration, QA",
     link: "https://mjwholesale.com/"
   }
 ];
@@ -29,34 +29,39 @@ const grid = document.getElementById("projectGrid");
 const modal = document.getElementById("projectModal");
 const closeBtn = document.getElementById("modalClose");
 
-// Fill modal with project data
-function openModal(project) {
-  document.getElementById("modalTitle").textContent = project.name;
-  document.getElementById("modalBanner").src = project.banner;
-  document.getElementById("modalAbout").textContent = project.about;
-  document.getElementById("modalChallenges").textContent = project.challenges;
-  document.getElementById("modalSolutions").textContent = project.solutions;
-  document.getElementById("modalDuration").textContent = project.duration;
-  document.getElementById("modalContribution").textContent = project.contribution;
-  document.getElementById("modalTools").textContent = project.tools;
-  document.getElementById("modalLink").href = project.link;
-
+function openModal(p) {
+  document.getElementById("modalTitle").textContent = p.name;
+  document.getElementById("modalBanner").src = p.banner;
+  document.getElementById("modalAbout").textContent = p.about;
+  document.getElementById("modalChallenges").textContent = p.challenges;
+  document.getElementById("modalSolutions").textContent = p.solutions;
+  document.getElementById("modalDuration").textContent = p.duration;
+  document.getElementById("modalContribution").textContent = p.contribution;
+  document.getElementById("modalLink").href = p.link;
   modal.style.display = "flex";
 }
 
-// Render all project cards
-projects.forEach(p => {
-  const card = document.createElement("div");
-  card.className = "project-card";
-  card.innerHTML = `
-    <img src="${p.banner}" alt="${p.name}" />
-    <h3>${p.name}</h3>
-    <p>${p.about}</p>
-  `;
-  card.addEventListener("click", () => openModal(p));
-  grid.appendChild(card);
-});
+function renderProjects(projects) {
+  grid.innerHTML = "";
+  projects.forEach(p => {
+    const div = document.createElement("div");
+    div.className = `project-card ${p.category}`;
+    div.innerHTML = `<h3>${p.name}</h3><img src="${p.banner}" /><p>${p.about}</p>`;
+    div.onclick = () => openModal(p);
+    grid.appendChild(div);
+  });
+}
 
-// Close modal events
+function filterProjects(category) {
+  const filtered = category === "all" ? projects : projects.filter(p => p.category === category);
+  renderProjects(filtered);
+  document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+// Initial Render
+renderProjects(projects);
+
+// Close modal
 closeBtn.onclick = () => modal.style.display = "none";
 window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
