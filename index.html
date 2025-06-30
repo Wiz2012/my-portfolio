@@ -705,7 +705,7 @@
         // Airtable Configuration
         const AIRTABLE_CONFIG = {
             baseId: 'app7912tAjdpdGLv6',
-            tableName: 'Portfolio-Projects', // Try using table name instead of view ID
+            tableName: 'tblbmd03sKX6krNcY', // Try using table name instead of view ID
             apiKey: 'pat6yR5CxXZKwu8JI.68f9b41a8b86e6727d5cdc7fc3332984c12d9738281dff1cf9fc42b6c98c03be' // Replace with your actual API key
         };
         const data = await response.json();
@@ -737,24 +737,27 @@
 
         // Function to fetch projects from Airtable
         async function fetchProjectsFromAirtable() {
-            try {
-                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableName}`, {
-                    headers: {
-                        'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                return data.records;
-            } catch (error) {
-                console.error('Error fetching projects from Airtable:', error);
-                throw error;
+    try {
+        const url = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${encodeURIComponent(AIRTABLE_CONFIG.tableName)}`;
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`
             }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log("✅ Airtable response:", data);  // <- ADD THIS
+        return data.records;
+    } catch (error) {
+        console.error('Error fetching projects from Airtable:', error);
+        throw error;
+    }
+}
+
 
         // Function to create project cards
         function createProjectCard(project) {
