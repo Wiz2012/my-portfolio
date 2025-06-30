@@ -15,31 +15,122 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f8f9fa;
         }
 
-        .container {
+        /* Header Styles */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,0 1000,100 1000,0"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header p {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.85;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
         }
 
         .projects-grid {
@@ -53,16 +144,17 @@
             background: white;
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            border: 1px solid #e9ecef;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
 
         .project-card::before {
@@ -81,12 +173,13 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1rem;
-            background: #f0f0f0;
+            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            color: #6c757d;
             font-size: 0.9rem;
+            border: 1px solid #dee2e6;
         }
 
         .project-category {
@@ -98,18 +191,21 @@
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .project-title {
             font-size: 1.3rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             color: #333;
+            line-height: 1.3;
         }
 
         .project-description {
-            color: #666;
-            line-height: 1.5;
+            color: #6c757d;
+            line-height: 1.6;
             margin-bottom: 1rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -125,27 +221,67 @@
         }
 
         .tech-tag {
-            background: #f0f0f0;
+            background: #e9ecef;
+            color: #495057;
             padding: 0.2rem 0.6rem;
             border-radius: 12px;
             font-size: 0.75rem;
-            color: #666;
+            font-weight: 500;
         }
 
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading and Error States */
         .loading {
             text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            margin: 3rem 0;
+            padding: 3rem;
+            color: #6c757d;
+            font-size: 1.1rem;
         }
 
         .error {
-            background: #ffebee;
-            color: #c62828;
+            background: #f8d7da;
+            color: #721c24;
             padding: 1rem;
             border-radius: 8px;
             margin: 2rem 0;
             text-align: center;
+            border: 1px solid #f5c6cb;
+        }
+
+        .no-more-projects {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 2rem;
         }
 
         /* Modal Styles */
@@ -163,12 +299,12 @@
 
         .modal-content {
             background-color: white;
-            margin: 5% auto;
+            margin: 3% auto;
             padding: 0;
             border-radius: 12px;
             width: 90%;
             max-width: 800px;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -187,11 +323,11 @@
             right: 1rem;
             top: 1rem;
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -213,11 +349,12 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1.5rem;
-            background: #f0f0f0;
+            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
         }
 
         .modal-category {
@@ -229,17 +366,20 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .modal-title {
             font-size: 2rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 1rem;
             color: #333;
+            line-height: 1.3;
         }
 
         .modal-description {
-            color: #666;
+            color: #6c757d;
             line-height: 1.6;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
@@ -252,6 +392,7 @@
         .modal-tech h4 {
             margin-bottom: 0.5rem;
             color: #333;
+            font-weight: 600;
         }
 
         .modal-tech-tags {
@@ -286,12 +427,30 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
 
-            .header h1 {
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
                 font-size: 2rem;
             }
 
@@ -316,42 +475,59 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <h1>Amit Solanki</h1>
-            <div class="subtitle">Project Coordinator & Post-Sales Business Analyst</div>
-            <p style="color: #7f8c8d; margin: 20px 0;">Transforming client requirements into digital solutions across diverse industries</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Amit Solanki</h1>
+            <p class="hero-subtitle">Business Analyst and Project Coordinator</p>
+            <p class="hero-description">
+                Crafting innovative digital experiences with cutting-edge technologies. 
+                Specializing in scalable web applications, healthcare solutions, and enterprise platforms.
+            </p>
             
-            <div class="stats">
+            <div class="stats-container">
                 <div class="stat-item">
-                    <div class="stat-number">90+</div>
-                    <div class="stat-label">Projects Delivered</div>
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">Projects Completed</span>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">4+</div>
-                    <div class="stat-label">Years Experience</div>
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">Years Experience</span>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Industries</div>
+                    <span class="stat-number" data-target="25">0</span>
+                    <span class="stat-label">Happy Clients</span>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Client Satisfaction</div>
+                    <span class="stat-number" data-target="99">0</span>
+                    <span class="stat-label">Success Rate</span>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Projects Section -->
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+
         <div id="loading" class="loading">
             Loading projects...
         </div>
 
         <div id="error" class="error" style="display: none;">
-            Failed to load projects. Please check your Airtable configuration.
+            Unable to load projects from database. Showing sample projects instead.
         </div>
 
         <div id="projects-container" class="projects-grid">
             <!-- Projects will be loaded here dynamically -->
+        </div>
+
+        <div id="load-more-container" class="load-more-container" style="display: none;">
+            <button id="load-more-btn" class="load-more-btn">Load More Projects</button>
+        </div>
+
+        <div id="no-more-projects" class="no-more-projects" style="display: none;">
+            No more projects to load.
         </div>
     </div>
 
@@ -376,17 +552,192 @@
     </div>
 
     <script>
+        // Sample fallback data in case Airtable doesn't work
+        const SAMPLE_PROJECTS = [
+            {
+                id: '1',
+                fields: {
+                    Title: 'Octapharma Plasma',
+                    Description: 'Comprehensive plasma donation management platform with patient scheduling, donor tracking, and compliance reporting. Implemented HIPAA-compliant workflows and multi-location coordination.',
+                    Category: 'Healthcare',
+                    Link: 'https://www.octapharmaplasma.com/',
+                    Technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS']
+                }
+            },
+            {
+                id: '2',
+                fields: {
+                    Title: 'Advanced Reconstruction Institute',
+                    Description: 'Multi-site medical practice platform with specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network integration.',
+                    Category: 'Healthcare',
+                    Link: 'https://www.advancedreconstruction.com/',
+                    Technologies: ['Vue.js', 'Laravel', 'MySQL', 'Docker']
+                }
+            },
+            {
+                id: '3',
+                fields: {
+                    Title: 'Ridgeline Health Group',
+                    Description: 'Healthcare provider platform featuring patient portal integration, appointment scheduling, and medical records management with seamless provider-patient communication.',
+                    Category: 'Healthcare',
+                    Link: 'https://www.ridgelinehealthgroup.com/',
+                    Technologies: ['Angular', 'Spring Boot', 'MongoDB', 'Azure']
+                }
+            },
+            {
+                id: '4',
+                fields: {
+                    Title: 'Door Systems',
+                    Description: 'Industrial door solutions platform with service management, technical specifications database, and B2B ordering system for commercial and industrial applications.',
+                    Category: 'Manufacturing',
+                    Link: 'https://www.doorsystems.com/',
+                    Technologies: ['React', 'Express.js', 'PostgreSQL', 'Redis']
+                }
+            },
+            {
+                id: '5',
+                fields: {
+                    Title: '4Sale Heavy Equipment',
+                    Description: 'Heavy machinery marketplace with advanced inventory management, equipment specifications, and dealer network integration for construction and industrial equipment.',
+                    Category: 'Manufacturing',
+                    Link: 'https://www.4saleheavyequipment.com/',
+                    Technologies: ['Next.js', 'Prisma', 'GraphQL', 'Vercel']
+                }
+            },
+            {
+                id: '6',
+                fields: {
+                    Title: 'Aeris Compressor Parts',
+                    Description: 'Specialized industrial parts catalog and ordering system with technical documentation, compatibility matching, and supply chain integration.',
+                    Category: 'Manufacturing',
+                    Link: 'https://aeriscompressorparts.com/',
+                    Technologies: ['Django', 'React', 'PostgreSQL', 'Elasticsearch']
+                }
+            },
+            {
+                id: '7',
+                fields: {
+                    Title: 'Hellio Energy Ecosystem',
+                    Description: 'Comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.',
+                    Category: 'Energy',
+                    Link: 'https://www.hellio.com/',
+                    Technologies: ['Vue.js', 'Node.js', 'MongoDB', 'AWS']
+                }
+            },
+            {
+                id: '8',
+                fields: {
+                    Title: 'Akea Energies',
+                    Description: 'Renewable energy consultation platform with project planning tools, energy auditing capabilities, and sustainability reporting for commercial and residential clients.',
+                    Category: 'Energy',
+                    Link: 'https://www.akea-energies.com/',
+                    Technologies: ['React', 'FastAPI', 'PostgreSQL', 'Docker']
+                }
+            },
+            {
+                id: '9',
+                fields: {
+                    Title: 'MJ Wholesale',
+                    Description: 'Multi-vendor wholesale distribution platform with inventory management, bulk pricing structures, and B2B customer portal for efficient order processing.',
+                    Category: 'E-commerce',
+                    Link: 'https://mjwholesale.com/',
+                    Technologies: ['Shopify Plus', 'React', 'Node.js', 'Stripe']
+                }
+            },
+            {
+                id: '10',
+                fields: {
+                    Title: 'Beast Branding',
+                    Description: 'Custom merchandise and branding solutions platform with design tools, product customization, and fulfillment integration for businesses and individuals.',
+                    Category: 'E-commerce',
+                    Link: 'https://beastbranding.com/',
+                    Technologies: ['WooCommerce', 'React', 'PHP', 'MySQL']
+                }
+            },
+            {
+                id: '11',
+                fields: {
+                    Title: 'Mail Manager',
+                    Description: 'Advanced email management and organization platform with intelligent sorting, collaboration tools, and productivity features for professional communication.',
+                    Category: 'Technology',
+                    Link: 'https://www.mailmanager.com/',
+                    Technologies: ['Electron', 'Vue.js', 'Python', 'SQLite']
+                }
+            },
+            {
+                id: '12',
+                fields: {
+                    Title: 'Nexford University',
+                    Description: 'Educational technology platform with learning management system, student tracking, and interactive course delivery for online higher education.',
+                    Category: 'Technology',
+                    Link: 'https://nexford.edu/',
+                    Technologies: ['React', 'Django', 'PostgreSQL', 'WebRTC']
+                }
+            },
+            {
+                id: '13',
+                fields: {
+                    Title: 'FocusCFO',
+                    Description: 'Financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities for growing businesses.',
+                    Category: 'Financial',
+                    Link: 'https://www.focuscfo.com/',
+                    Technologies: ['Angular', 'ASP.NET', 'SQL Server', 'Azure']
+                }
+            },
+            {
+                id: '14',
+                fields: {
+                    Title: 'Tax Advisory Partnership',
+                    Description: 'Tax consultation and compliance platform with automated workflows, document management, and client communication tools for professional tax services.',
+                    Category: 'Financial',
+                    Link: 'https://www.taxadvisorypartnership.com/',
+                    Technologies: ['React', 'Spring Boot', 'Oracle', 'Kubernetes']
+                }
+            }
+        ];
+
+        // State management
+        let allProjects = [];
+        let displayedProjects = [];
+        let currentPage = 0;
+        const projectsPerPage = 3;
+
         // Airtable Configuration
         const AIRTABLE_CONFIG = {
             baseId: 'app7912tAjdpdGLv6',
-            tableId: 'Portfolio Projects', // This might need to be the actual table name, not the view ID
-            apiKey: 'pat6yR5CxXZKwu8JI.68f9b41a8b86e6727d5cdc7fc3332984c12d9738281dff1cf9fc42b6c98c03be' // You need to replace this with your actual API key
+            tableName: 'Portfolio Projects', // Try using table name instead of view ID
+            apiKey: 'pat6yR5CxXZKwu8JI.68f9b41a8b86e6727d5cdc7fc3332984c12d9738281dff1cf9fc42b6c98c03be' // Replace with your actual API key
         };
 
+        // Counter animation function
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (target === 99 ? '%' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (target === 99 ? '%' : '');
+                }
+            }, 16);
+        }
+
+        // Initialize counters
+        function initCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                animateCounter(counter, target);
+            });
+        }
+
         // Function to fetch projects from Airtable
-        async function fetchProjects() {
+        async function fetchProjectsFromAirtable() {
             try {
-                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableId}`, {
+                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableName}`, {
                     headers: {
                         'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`
                     }
@@ -399,7 +750,7 @@
                 const data = await response.json();
                 return data.records;
             } catch (error) {
-                console.error('Error fetching projects:', error);
+                console.error('Error fetching projects from Airtable:', error);
                 throw error;
             }
         }
@@ -436,6 +787,36 @@
             `;
 
             return card;
+        }
+
+        // Function to display projects
+        function displayProjects(projects) {
+            const projectsContainer = document.getElementById('projects-container');
+            
+            projects.forEach(project => {
+                const card = createProjectCard(project);
+                projectsContainer.appendChild(card);
+            });
+
+            displayedProjects.push(...projects);
+        }
+
+        // Function to load more projects
+        function loadMoreProjects() {
+            const startIndex = currentPage * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+            const nextProjects = allProjects.slice(startIndex, endIndex);
+
+            if (nextProjects.length > 0) {
+                displayProjects(nextProjects);
+                currentPage++;
+
+                // Check if there are more projects to load
+                if (endIndex >= allProjects.length) {
+                    document.getElementById('load-more-container').style.display = 'none';
+                    document.getElementById('no-more-projects').style.display = 'block';
+                }
+            }
         }
 
         // Function to open modal
@@ -489,37 +870,68 @@
         async function loadProjects() {
             const loadingElement = document.getElementById('loading');
             const errorElement = document.getElementById('error');
-            const projectsContainer = document.getElementById('projects-container');
+            const loadMoreContainer = document.getElementById('load-more-container');
 
             try {
                 loadingElement.style.display = 'block';
                 errorElement.style.display = 'none';
 
-                const projects = await fetchProjects();
-                
+                // Try to fetch from Airtable first
+                if (AIRTABLE_CONFIG.apiKey !== 'YOUR_AIRTABLE_API_KEY') {
+                    try {
+                        const projects = await fetchProjectsFromAirtable();
+                        if (projects.length > 0) {
+                            allProjects = projects;
+                        } else {
+                            throw new Error('No projects found in Airtable');
+                        }
+                    } catch (airtableError) {
+                        console.error('Airtable fetch failed:', airtableError);
+                        // Fall back to sample data
+                        allProjects = SAMPLE_PROJECTS;
+                        errorElement.style.display = 'block';
+                    }
+                } else {
+                    // Use sample data if API key is not configured
+                    allProjects = SAMPLE_PROJECTS;
+                    errorElement.style.display = 'block';
+                }
+
                 loadingElement.style.display = 'none';
                 
-                if (projects.length === 0) {
-                    errorElement.textContent = 'No projects found in the database.';
+                if (allProjects.length === 0) {
+                    errorElement.textContent = 'No projects found.';
                     errorElement.style.display = 'block';
                     return;
                 }
 
-                projectsContainer.innerHTML = '';
-                projects.forEach(project => {
-                    const card = createProjectCard(project);
-                    projectsContainer.appendChild(card);
-                });
+                // Load first batch of projects
+                loadMoreProjects();
+
+                // Show load more button if there are more projects
+                if (allProjects.length > projectsPerPage) {
+                    loadMoreContainer.style.display = 'block';
+                }
 
             } catch (error) {
                 loadingElement.style.display = 'none';
                 errorElement.style.display = 'block';
+                errorElement.textContent = 'Failed to load projects. Please try again later.';
                 console.error('Failed to load projects:', error);
             }
         }
 
         // Event listeners
-        document.addEventListener('DOMContentLoaded', loadProjects);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize counters
+            setTimeout(initCounters, 500);
+            
+            // Load projects
+            loadProjects();
+        });
+
+        // Load more button event listener
+        document.getElementById('load-more-btn').addEventListener('click', loadMoreProjects);
 
         // Modal event listeners
         document.querySelector('.close').onclick = closeModal;
@@ -534,6 +946,29 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
+            }
+        });
+
+        // Intersection Observer for counter animation on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe the stats container
+        document.addEventListener('DOMContentLoaded', function() {
+            const statsContainer = document.querySelector('.stats-container');
+            if (statsContainer) {
+                observer.observe(statsContainer);
             }
         });
     </script>
