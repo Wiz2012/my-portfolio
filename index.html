@@ -750,18 +750,40 @@
         }
 
         const data = await response.json();
-        console.log("✅ Airtable response:", data);  // <- ADD THIS
-        return data.records;
+        console.log("✅ Airtable response:", data);
+
+        return data.records.map(record => {
+            const fields = record.fields;
+
+            const imageUrl = Array.isArray(fields.Image)
+                ? fields.Image[0]?.url
+                : typeof fields.Image === "string"
+                    ? fields.Image
+                    : null;
+
+            return {
+                title: fields.Title,
+                description: fields.Description,
+                category: fields.Category || "other",
+                image: imageUrl,
+                technologies: fields.Technologies || "",
+                link: fields.Link || "#",
+                challenges: fields.Challenges || "",
+                solutions: fields.Solutions || "",
+                duration: fields.Duration || "",
+                contribution: fields.Contribution || ""
+            };
+        });
     } catch (error) {
         console.error('Error fetching projects from Airtable:', error);
-        throw error;
+        return [];
     }
 }
 
 
         // Function to create project cards
         function createProjectCard(project) {
-            const fields = project.fields;
+            const fields = project; // Airtable records were mapped flatly
             
             const card = document.createElement('div');
             card.className = 'project-card';
@@ -769,11 +791,12 @@
 
             // Handle image
             let imageElement = '';
-            if (fields.Image && fields.Image.length > 0) {
-                imageElement = `<img src="${fields.Image[0].url}" alt="${fields.Title}" class="project-image">`;
-            } else {
-                imageElement = `<div class="project-image">No Image Available</div>`;
-            }
+            if (fields.image) {
+  imageElement = `<img src="${fields.image}" alt="${fields.title}" class="project-image">`;
+} else {
+  imageElement = `<div class="project-image">No Image Available</div>`;
+}
+
 
             // Handle technologies
             let techTags = '';
@@ -826,7 +849,8 @@
         // Function to open modal
         function openModal(project) {
             const modal = document.getElementById('projectModal');
-            const fields = project.fields;
+            const fields = project; // Airtable records were mapped flatly
+
 
             // Update modal content
             document.getElementById('modal-category').textContent = fields.Category || 'General';
@@ -835,11 +859,12 @@
 
             // Handle image
             const modalImage = document.getElementById('modal-image');
-            if (fields.Image && fields.Image.length > 0) {
-                modalImage.innerHTML = `<img src="${fields.Image[0].url}" alt="${fields.Title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
-            } else {
-                modalImage.innerHTML = 'No Image Available';
-            }
+            if (fields.image) {
+  modalImage.innerHTML = `<img src="${fields.image}" alt="${fields.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+} else {
+  modalImage.innerHTML = 'No Image Available';
+}
+
 
             // Handle technologies
             const modalTech = document.getElementById('modal-tech');
@@ -975,6 +1000,8 @@
                 observer.observe(statsContainer);
             }
         });
+
+        
     </script>
 </body>
 </html>
