@@ -708,7 +708,8 @@
             tableName: 'Portfolio-Projects', // Try using table name instead of view ID
             apiKey: 'pat6yR5CxXZKwu8JI.68f9b41a8b86e6727d5cdc7fc3332984c12d9738281dff1cf9fc42b6c98c03be' // Replace with your actual API key
         };
-
+        const data = await response.json();
+    console.log('✅ Airtable data:', data); // DEBUGGING
         // Counter animation function
         function animateCounter(element, target, duration = 2000) {
             let start = 0;
@@ -971,6 +972,7 @@
                 observer.observe(statsContainer);
             }
         });
+        loadProjects();
     </script>
 </body>
 </html>
