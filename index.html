@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amit Solanki - Project Coordinator & Business Analyst</title>
+    <title>Amit Solanki - Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -22,273 +22,295 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 3rem;
+            color: white;
         }
 
         .header h1 {
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header .subtitle {
-            font-size: 1.3rem;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-        }
-
-        .header .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .section h2 {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            background: #ecf0f1;
-            color: #2c3e50;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .project-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        .project-card.healthcare {
-            border-left-color: #e74c3c;
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
-        .project-card.manufacturing {
-            border-left-color: #f39c12;
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
         }
 
-        .project-card.energy {
-            border-left-color: #27ae60;
-        }
-
-        .project-card.ecommerce {
-            border-left-color: #9b59b6;
-        }
-
-        .project-card.technology {
-            border-left-color: #3498db;
-        }
-
-        .project-card.financial {
-            border-left-color: #34495e;
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .project-title {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
+            color: #333;
         }
-
-        .project-category {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .healthcare-tag { background: #fee; color: #e74c3c; }
-        .manufacturing-tag { background: #fef5e7; color: #f39c12; }
-        .energy-tag { background: #eafaf1; color: #27ae60; }
-        .ecommerce-tag { background: #f4ecf7; color: #9b59b6; }
-        .technology-tag { background: #ebf3fd; color: #3498db; }
-        .financial-tag { background: #eaecee; color: #34495e; }
 
         .project-description {
-            color: #7f8c8d;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .project-link {
-            display: inline-block;
-            padding: 8px 16px;
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 3rem 0;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 12px 12px 0 0;
+            position: relative;
         }
 
-        .project-link:hover {
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .close:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .modal-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .modal-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-tech {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-tech h4 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .modal-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .modal-tech-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .modal-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .modal-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .skill-category h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 5px 0;
-            color: #7f8c8d;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .skill-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .contact-section {
-            text-align: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 30px;
-        }
-
-        .contact-section h2 {
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
             .header h1 {
                 font-size: 2rem;
             }
-            
-            .header .stats {
-                gap: 20px;
-            }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            
-            .filter-buttons {
-                gap: 5px;
+
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
             }
-            
-            .filter-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -320,254 +342,199 @@
                 </div>
             </div>
         </div>
-
-        <!-- Projects Section -->
-        <div class="section">
-            <h2>Project Portfolio</h2>
-            
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
-                <button class="filter-btn" onclick="filterProjects('healthcare')">Healthcare</button>
-                <button class="filter-btn" onclick="filterProjects('manufacturing')">Manufacturing</button>
-                <button class="filter-btn" onclick="filterProjects('energy')">Energy</button>
-                <button class="filter-btn" onclick="filterProjects('ecommerce')">E-commerce</button>
-                <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
-                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button>
-            </div>
-
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Healthcare Projects -->
-                <div class="project-card healthcare">
-                    <div class="project-title">Octapharma Plasma</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Comprehensive plasma donation management platform with patient scheduling, donor tracking, and compliance reporting. Implemented HIPAA-compliant workflows and multi-location coordination.
-                    </div>
-                    <a href="https://www.octapharmaplasma.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card healthcare">
-                    <div class="project-title">Advanced Reconstruction Institute</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Multi-site medical practice platform with specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network integration.
-                    </div>
-                    <a href="https://www.advancedreconstruction.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card healthcare">
-                    <div class="project-title">Ridgeline Health Group</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Healthcare provider platform featuring patient portal integration, appointment scheduling, and medical records management with seamless provider-patient communication.
-                    </div>
-                    <a href="https://www.ridgelinehealthgroup.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Manufacturing Projects -->
-                <div class="project-card manufacturing">
-                    <div class="project-title">Door Systems</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Industrial door solutions platform with service management, technical specifications database, and B2B ordering system for commercial and industrial applications.
-                    </div>
-                    <a href="https://www.doorsystems.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card manufacturing">
-                    <div class="project-title">4Sale Heavy Equipment</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Heavy machinery marketplace with advanced inventory management, equipment specifications, and dealer network integration for construction and industrial equipment.
-                    </div>
-                    <a href="https://www.4saleheavyequipment.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card manufacturing">
-                    <div class="project-title">Aeris Compressor Parts</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Specialized industrial parts catalog and ordering system with technical documentation, compatibility matching, and supply chain integration.
-                    </div>
-                    <a href="https://aeriscompressorparts.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Energy Projects -->
-                <div class="project-card energy">
-                    <div class="project-title">Hellio Energy Ecosystem</div>
-                    <span class="project-category energy-tag">Energy</span>
-                    <div class="project-description">
-                        Comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.
-                    </div>
-                    <a href="https://www.hellio.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card energy">
-                    <div class="project-title">Akea Energies</div>
-                    <span class="project-category energy-tag">Energy</span>
-                    <div class="project-description">
-                        Renewable energy consultation platform with project planning tools, energy auditing capabilities, and sustainability reporting for commercial and residential clients.
-                    </div>
-                    <a href="https://www.akea-energies.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- E-commerce Projects -->
-                <div class="project-card ecommerce">
-                    <div class="project-title">MJ Wholesale</div>
-                    <span class="project-category ecommerce-tag">E-commerce</span>
-                    <div class="project-description">
-                        Multi-vendor wholesale distribution platform with inventory management, bulk pricing structures, and B2B customer portal for efficient order processing.
-                    </div>
-                    <a href="https://mjwholesale.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card ecommerce">
-                    <div class="project-title">Beast Branding</div>
-                    <span class="project-category ecommerce-tag">E-commerce</span>
-                    <div class="project-description">
-                        Custom merchandise and branding solutions platform with design tools, product customization, and fulfillment integration for businesses and individuals.
-                    </div>
-                    <a href="https://beastbranding.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Technology Projects -->
-                <div class="project-card technology">
-                    <div class="project-title">Mail Manager</div>
-                    <span class="project-category technology-tag">Technology</span>
-                    <div class="project-description">
-                        Advanced email management and organization platform with intelligent sorting, collaboration tools, and productivity features for professional communication.
-                    </div>
-                    <a href="https://www.mailmanager.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card technology">
-                    <div class="project-title">Nexford University</div>
-                    <span class="project-category technology-tag">Technology</span>
-                    <div class="project-description">
-                        Educational technology platform with learning management system, student tracking, and interactive course delivery for online higher education.
-                    </div>
-                    <a href="https://nexford.edu/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Financial Projects -->
-                <div class="project-card financial">
-                    <div class="project-title">FocusCFO</div>
-                    <span class="project-category financial-tag">Financial</span>
-                    <div class="project-description">
-                        Financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities for growing businesses.
-                    </div>
-                    <a href="https://www.focuscfo.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card financial">
-                    <div class="project-title">Tax Advisory Partnership</div>
-                    <span class="project-category financial-tag">Financial</span>
-                    <div class="project-description">
-                        Tax consultation and compliance platform with automated workflows, document management, and client communication tools for professional tax services.
-                    </div>
-                    <a href="https://www.taxadvisorypartnership.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-            </div>
+        <div id="loading" class="loading">
+            Loading projects...
         </div>
 
-        <!-- Skills Section -->
-        <div class="section">
-            <h2>Core Competencies</h2>
-            <div class="skills-section">
-                <div class="skill-category">
-                    <h3>Business Analysis</h3>
-                    <ul class="skill-list">
-                        <li>Requirements Gathering & Documentation</li>
-                        <li>Stakeholder Management</li>
-                        <li>Process Analysis & Optimization</li>
-                        <li>Technical Specification Writing</li>
-                        <li>User Story Creation</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Project Management</h3>
-                    <ul class="skill-list">
-                        <li>End-to-End Project Coordination</li>
-                        <li>Timeline Estimation & Planning</li>
-                        <li>Cross-functional Team Leadership</li>
-                        <li>Client Communication & Reporting</li>
-                        <li>Quality Assurance Coordination</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Design & Development</h3>
-                    <ul class="skill-list">
-                        <li>Figma Design & Prototyping</li>
-                        <li>UI/UX Design Principles</li>
-                        <li>Responsive Web Design</li>
-                        <li>Development Team Collaboration</li>
-                        <li>User Experience Testing</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Industry Expertise</h3>
-                    <ul class="skill-list">
-                        <li>Healthcare & HIPAA Compliance</li>
-                        <li>E-commerce & B2B Platforms</li>
-                        <li>Manufacturing & Industrial Solutions</li>
-                        <li>Energy & Sustainability Systems</li>
-                        <li>Financial Services & Security</li>
-                    </ul>
-                </div>
-            </div>
+        <div id="error" class="error" style="display: none;">
+            Failed to load projects. Please check your Airtable configuration.
         </div>
 
-        <!-- Contact Section -->
-        <div class="contact-section">
-            <h2>Let's Connect</h2>
-            <div class="contact-info">📧 amit.solanki0987@gmail.com</div>
-            <div class="contact-info">📱 +91 9601875084</div>
-            <div class="contact-info">📍 Ahmedabad, Gujarat, India</div>
-            <div class="contact-info">💼 LinkedIn: <a href="https://in.linkedin.com/in/amit-solanki0987">https://in.linkedin.com/in/amit-solanki0987</a></div>
+        <div id="projects-container" class="projects-grid">
+            <!-- Projects will be loaded here dynamically -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <div id="modal-category" class="modal-category"></div>
+                <h2 id="modal-title" class="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <div id="modal-image" class="modal-project-image">No Image Available</div>
+                <p id="modal-description" class="modal-description"></p>
+                <div id="modal-tech" class="modal-tech" style="display: none;">
+                    <h4>Technologies Used:</h4>
+                    <div id="modal-tech-tags" class="modal-tech-tags"></div>
+                </div>
+                <a id="modal-link" class="modal-link" href="#" target="_blank" style="display: none;">View Project</a>
+            </div>
         </div>
     </div>
 
     <script>
-        function filterProjects(category) {
-            const cards = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-        
-        // Add fade-in animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Smooth scrolling for better UX
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Airtable Configuration
+        const AIRTABLE_CONFIG = {
+            baseId: 'app7912tAjdpdGLv6',
+            tableId: 'Portfolio Projects', // This might need to be the actual table name, not the view ID
+            apiKey: 'pat6yR5CxXZKwu8JI.68f9b41a8b86e6727d5cdc7fc3332984c12d9738281dff1cf9fc42b6c98c03be' // You need to replace this with your actual API key
+        };
+
+        // Function to fetch projects from Airtable
+        async function fetchProjects() {
+            try {
+                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`
+                    }
                 });
-            });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.records;
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+                throw error;
+            }
+        }
+
+        // Function to create project cards
+        function createProjectCard(project) {
+            const fields = project.fields;
+            
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = () => openModal(project);
+
+            // Handle image
+            let imageElement = '';
+            if (fields.Image && fields.Image.length > 0) {
+                imageElement = `<img src="${fields.Image[0].url}" alt="${fields.Title}" class="project-image">`;
+            } else {
+                imageElement = `<div class="project-image">No Image Available</div>`;
+            }
+
+            // Handle technologies
+            let techTags = '';
+            if (fields.Technologies) {
+                const techs = Array.isArray(fields.Technologies) ? fields.Technologies : fields.Technologies.split(',');
+                techTags = techs.map(tech => `<span class="tech-tag">${tech.trim()}</span>`).join('');
+            }
+
+            card.innerHTML = `
+                ${imageElement}
+                <div class="project-category">${fields.Category || 'General'}</div>
+                <h3 class="project-title">${fields.Title || 'Untitled Project'}</h3>
+                <p class="project-description">${fields.Description || 'No description available.'}</p>
+                ${techTags ? `<div class="project-tech">${techTags}</div>` : ''}
+            `;
+
+            return card;
+        }
+
+        // Function to open modal
+        function openModal(project) {
+            const modal = document.getElementById('projectModal');
+            const fields = project.fields;
+
+            // Update modal content
+            document.getElementById('modal-category').textContent = fields.Category || 'General';
+            document.getElementById('modal-title').textContent = fields.Title || 'Untitled Project';
+            document.getElementById('modal-description').textContent = fields.Description || 'No description available.';
+
+            // Handle image
+            const modalImage = document.getElementById('modal-image');
+            if (fields.Image && fields.Image.length > 0) {
+                modalImage.innerHTML = `<img src="${fields.Image[0].url}" alt="${fields.Title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            } else {
+                modalImage.innerHTML = 'No Image Available';
+            }
+
+            // Handle technologies
+            const modalTech = document.getElementById('modal-tech');
+            const modalTechTags = document.getElementById('modal-tech-tags');
+            
+            if (fields.Technologies) {
+                const techs = Array.isArray(fields.Technologies) ? fields.Technologies : fields.Technologies.split(',');
+                modalTechTags.innerHTML = techs.map(tech => `<span class="modal-tech-tag">${tech.trim()}</span>`).join('');
+                modalTech.style.display = 'block';
+            } else {
+                modalTech.style.display = 'none';
+            }
+
+            // Handle project link
+            const modalLink = document.getElementById('modal-link');
+            if (fields.Link) {
+                modalLink.href = fields.Link;
+                modalLink.style.display = 'inline-block';
+            } else {
+                modalLink.style.display = 'none';
+            }
+
+            modal.style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        // Function to load and display projects
+        async function loadProjects() {
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+            const projectsContainer = document.getElementById('projects-container');
+
+            try {
+                loadingElement.style.display = 'block';
+                errorElement.style.display = 'none';
+
+                const projects = await fetchProjects();
+                
+                loadingElement.style.display = 'none';
+                
+                if (projects.length === 0) {
+                    errorElement.textContent = 'No projects found in the database.';
+                    errorElement.style.display = 'block';
+                    return;
+                }
+
+                projectsContainer.innerHTML = '';
+                projects.forEach(project => {
+                    const card = createProjectCard(project);
+                    projectsContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                loadingElement.style.display = 'none';
+                errorElement.style.display = 'block';
+                console.error('Failed to load projects:', error);
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', loadProjects);
+
+        // Modal event listeners
+        document.querySelector('.close').onclick = closeModal;
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
