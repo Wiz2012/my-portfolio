@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Solanki - Project Coordinator & Business Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card::after {
+            content: "Click to view details";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .project-card.healthcare {
+            border-left-color: #e74c3c;
+        }
+
+        .project-card.manufacturing {
+            border-left-color: #f39c12;
+        }
+
+        .project-card.energy {
+            border-left-color: #27ae60;
+        }
+
+        .project-card.ecommerce {
+            border-left-color: #9b59b6;
+        }
+
+        .project-card.technology {
+            border-left-color: #3498db;
+        }
+
+        .project-card.financial {
+            border-left-color: #34495e;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .healthcare-tag { background: #fee; color: #e74c3c; }
+        .manufacturing-tag { background: #fef5e7; color: #f39c12; }
+        .energy-tag { background: #eafaf1; color: #27ae60; }
+        .ecommerce-tag { background: #f4ecf7; color: #9b59b6; }
+        .technology-tag { background: #ebf3fd; color: #3498db; }
+        .financial-tag { background: #eaecee; color: #34495e; }
+
+        .project-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section-icon {
+            font-size: 1.2rem;
+        }
+
+        .modal-section p, .modal-section ul {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .modal-section ul {
+            padding-left: 20px;
+        }
+
+        .modal-section li {
+            margin-bottom: 8px;
+        }
+
+        .customer-review {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-style: italic;
+            position: relative;
+        }
+
+        .customer-review::before {
+            content: '"';
+            font-size: 3rem;
+            color: #667eea;
+            position: absolute;
+            top: -5px;
+            left: 15px;
+        }
+
+        .customer-info {
+            margin-top: 15px;
+            font-style: normal;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .visit-project-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .visit-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 5px 0;
+            color: #7f8c8d;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header .stats {
+                gap: 20px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 5px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .modal-header, .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Amit Solanki</h1>
+            <div class="subtitle">Project Coordinator & Post-Sales Business Analyst</div>
+            <p style="color: #7f8c8d; margin: 20px 0;">Transforming client requirements into digital solutions across diverse industries</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">90+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+            <h2>Project Portfolio</h2>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <button class="filter-btn" onclick="filterProjects('healthcare')">Healthcare</button>
+                <button class="filter-btn" onclick="filterProjects('manufacturing')">Manufacturing</button>
+                <button class="filter-btn" onclick="filterProjects('energy')">Energy</button>
+                <button class="filter-btn" onclick="filterProjects('ecommerce')">E-commerce</button>
+                <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
+                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Healthcare Projects -->
+                <div class="project-card healthcare" onclick="openModal('octapharma')">
+                    <div class="project-title">Octapharma Plasma</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Comprehensive plasma donation management platform with patient scheduling, donor tracking, and compliance reporting. Implemented HIPAA-compliant workflows and multi-location coordination.
+                    </div>
+                    <a href="https://www.octapharmaplasma.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card healthcare" onclick="openModal('advanced-reconstruction')">
+                    <div class="project-title">Advanced Reconstruction Institute</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Multi-site medical practice platform with specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network integration.
+                    </div>
+                    <a href="https://www.advancedreconstruction.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card healthcare" onclick="openModal('ridgeline')">
+                    <div class="project-title">Ridgeline Health Group</div>
+                    <span class="project-category healthcare-tag">Healthcare</span>
+                    <div class="project-description">
+                        Healthcare provider platform featuring patient portal integration, appointment scheduling, and medical records management with seamless provider-patient communication.
+                    </div>
+                    <a href="https://www.ridgelinehealthgroup.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <!-- Manufacturing Projects -->
+                <div class="project-card manufacturing" onclick="openModal('door-systems')">
+                    <div class="project-title">Door Systems</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Industrial door solutions platform with service management, technical specifications database, and B2B ordering system for commercial and industrial applications.
+                    </div>
+                    <a href="https://www.doorsystems.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card manufacturing" onclick="openModal('4sale-equipment')">
+                    <div class="project-title">4Sale Heavy Equipment</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Heavy machinery marketplace with advanced inventory management, equipment specifications, and dealer network integration for construction and industrial equipment.
+                    </div>
+                    <a href="https://www.4saleheavyequipment.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card manufacturing" onclick="openModal('aeris-compressor')">
+                    <div class="project-title">Aeris Compressor Parts</div>
+                    <span class="project-category manufacturing-tag">Manufacturing</span>
+                    <div class="project-description">
+                        Specialized industrial parts catalog and ordering system with technical documentation, compatibility matching, and supply chain integration.
+                    </div>
+                    <a href="https://aeriscompressorparts.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <!-- Energy Projects -->
+                <div class="project-card energy" onclick="openModal('hellio-energy')">
+                    <div class="project-title">Hellio Energy Ecosystem</div>
+                    <span class="project-category energy-tag">Energy</span>
+                    <div class="project-description">
+                        Comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.
+                    </div>
+                    <a href="https://www.hellio.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card energy" onclick="openModal('akea-energies')">
+                    <div class="project-title">Akea Energies</div>
+                    <span class="project-category energy-tag">Energy</span>
+                    <div class="project-description">
+                        Renewable energy consultation platform with project planning tools, energy auditing capabilities, and sustainability reporting for commercial and residential clients.
+                    </div>
+                    <a href="https://www.akea-energies.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <!-- E-commerce Projects -->
+                <div class="project-card ecommerce" onclick="openModal('mj-wholesale')">
+                    <div class="project-title">MJ Wholesale</div>
+                    <span class="project-category ecommerce-tag">E-commerce</span>
+                    <div class="project-description">
+                        Multi-vendor wholesale distribution platform with inventory management, bulk pricing structures, and B2B customer portal for efficient order processing.
+                    </div>
+                    <a href="https://mjwholesale.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card ecommerce" onclick="openModal('beast-branding')">
+                    <div class="project-title">Beast Branding</div>
+                    <span class="project-category ecommerce-tag">E-commerce</span>
+                    <div class="project-description">
+                        Custom merchandise and branding solutions platform with design tools, product customization, and fulfillment integration for businesses and individuals.
+                    </div>
+                    <a href="https://beastbranding.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <!-- Technology Projects -->
+                <div class="project-card technology" onclick="openModal('mail-manager')">
+                    <div class="project-title">Mail Manager</div>
+                    <span class="project-category technology-tag">Technology</span>
+                    <div class="project-description">
+                        Advanced email management and organization platform with intelligent sorting, collaboration tools, and productivity features for professional communication.
+                    </div>
+                    <a href="https://www.mailmanager.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card technology" onclick="openModal('nexford-university')">
+                    <div class="project-title">Nexford University</div>
+                    <span class="project-category technology-tag">Technology</span>
+                    <div class="project-description">
+                        Educational technology platform with learning management system, student tracking, and interactive course delivery for online higher education.
+                    </div>
+                    <a href="https://nexford.edu/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <!-- Financial Projects -->
+                <div class="project-card financial" onclick="openModal('focus-cfo')">
+                    <div class="project-title">FocusCFO</div>
+                    <span class="project-category financial-tag">Financial</span>
+                    <div class="project-description">
+                        Financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities for growing businesses.
+                    </div>
+                    <a href="https://www.focuscfo.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+
+                <div class="project-card financial" onclick="openModal('tax-advisory')">
+                    <div class="project-title">Tax Advisory Partnership</div>
+                    <span class="project-category financial-tag">Financial</span>
+                    <div class="project-description">
+                        Tax consultation and compliance platform with automated workflows, document management, and client communication tools for professional tax services.
+                    </div>
+                    <a href="https://www.taxadvisorypartnership.com/" class="project-link" target="_blank" onclick="event.stopPropagation()">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div class="modal-title" id="modalTitle"></div>
+                    <span class="modal-category" id="modalCategory"></span>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="visit-project-btn" id="modalProjectLink" target="_blank">Visit Live Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Core Competencies</h2>
+            <div class="skills-section">
+                <div class="skill-category">
+                    <h3>Business Analysis</h3>
+                    <ul class="skill-list">
+                        <li>Requirements Gathering & Documentation</li>
+                        <li>Stakeholder Management</li>
+                        <li>Process Analysis & Optimization</li>
+                        <li>Technical Specification Writing</li>
+                        <li>User Story Creation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Project Management</h3>
+                    <ul class="skill-list">
+                        <li>End-to-End Project Coordination</li>
+                        <li>Timeline Estimation & Planning</li>
+                        <li>Cross-functional Team Leadership</li>
+                        <li>Client Communication & Reporting</li>
+                        <li>Quality Assurance Coordination</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Design & Development</h3>
+                    <ul class="skill-list">
+                        <li>Figma Design & Prototyping</li>
+                        <li>UI/UX Design Principles</li>
+                        <li>Responsive Web Design</li>
+                        <li>Development Team Collaboration</li>
+                        <li>User Experience Testing</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Industry Expertise</h3>
+                    <ul class="skill-list">
+                        <li>Healthcare & HIPAA Compliance</li>
+                        <li>E-commerce & B2B Platforms</li>
+                        <li>Manufacturing & Industrial Solutions</li>
+                        <li>Energy & Sustainability Systems</li>
+                        <li>Financial Services & Security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Let's Connect</h2>
+            <div class="contact-info">📧 amit.solanki0987@gmail.com</div>
+            <div class="contact-info">📱 +91 9601875084</div>
+            <div class="contact-info">📍 Ahmedabad, Gujarat, India</div>
+            <div class="contact-info">💼 LinkedIn: <a href="https://in.linkedin.com/in/amit-solanki0987">https://in.linkedin.com/in/amit-solanki0987</a></div>
+        </div>
+    </div>
+
+    <script>
+        // Project data with detailed information
+        const projectData = {
+            'octapharma': {
+                title: 'Octapharma Plasma',
+                category: 'Healthcare',
+                categoryClass: 'healthcare-tag',
+                url: 'https://www.octapharmaplasma.com/',
+                overview: 'Developed a comprehensive plasma donation management platform that streamlines the entire donation process from donor registration to plasma collection and compliance reporting.',
+                problem: 'The client needed a robust system to manage multiple plasma donation centers with complex regulatory requirements, donor tracking, and appointment scheduling while maintaining HIPAA compliance.',
+                challenges: [
+                    'Implementing HIPAA-compliant data handling and security protocols',
+                    'Integrating with existing medical equipment and laboratory systems',
+                    'Managing complex donor eligibility criteria and medical history tracking',
+                    'Coordinating operations across multiple locations with different state regulations'
+                ],
+                solutions: [
+                    'Designed a secure, cloud-based architecture with encrypted data transmission',
+                    'Implemented automated eligibility screening with medical history integration',
+                    'Created a centralized dashboard for multi-location management',
+                    'Developed automated compliance reporting and audit trail systems'
+                ],
+                role: 'Led the project from initial requirements gathering to final deployment. Coordinated with medical professionals, IT teams, and regulatory compliance specialists to ensure all healthcare standards were met.',
+                timeline: '8 months',
+                teamSize: '12 members',
+                review: {
+                    text: 'Amit\'s expertise in healthcare regulations and project management was instrumental in delivering a platform that not only met our operational needs but exceeded our compliance requirements. The system has improved our donor management efficiency by 40%.',
+                    author: 'Dr. Sarah Johnson, Operations Director'
+                }
+            },
+            'advanced-reconstruction': {
+                title: 'Advanced Reconstruction Institute',
+                category: 'Healthcare',
+                categoryClass: 'healthcare-tag',
+                url: 'https://www.advancedreconstruction.com/',
+                overview: 'Built a comprehensive multi-site medical practice platform serving specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network.',
+                problem: 'The institute needed a unified platform to manage multiple specialized medical practices across different locations while maintaining individual branding and specialized workflows.',
+                challenges: [
+                    'Coordinating different medical specialties with unique workflow requirements',
+                    'Managing multi-state operations with varying regulatory requirements',
+                    'Integrating patient records across multiple locations and specialties',
+                    'Maintaining HIPAA compliance while enabling efficient information sharing'
+                ],
+                solutions: [
+                    'Developed a modular architecture allowing specialty-specific customizations',
+                    'Implemented a unified patient management system with role-based access',
+                    'Created automated referral systems between different specialties',
+                    'Built comprehensive reporting dashboards for each division'
+                ],
+                role: 'Served as the primary business analyst and project coordinator, working closely with medical directors from each specialty to understand unique requirements and translate them into technical specifications.',
+                timeline: '10 months',
+                teamSize: '15 members',
+                review: {
+                    text: 'The platform Amit delivered has transformed how we manage our multi-specialty practice. The seamless integration between our different divisions has improved patient care coordination and operational efficiency significantly.',
+                    author: 'Dr. Michael Chen, Medical Director'
+                }
+            },
+            'ridgeline': {
+                title: 'Ridgeline Health Group',
+                category: 'Healthcare',
+                categoryClass: 'healthcare-tag',
+                url: 'https://www.ridgelinehealthgroup.com/',
+                overview: 'Developed a comprehensive healthcare provider platform with integrated patient portal, appointment scheduling, and medical records management system.',
+                problem: 'The healthcare group needed a modern digital platform to improve patient engagement, streamline appointments, and provide secure access to medical records.',
+                challenges: [
+                    'Creating an intuitive patient portal for users of all tech skill levels',
+                    'Integrating with existing Electronic Health Record (EHR) systems',
+                    'Implementing secure messaging between patients and providers',
+                    'Ensuring mobile responsiveness for on-the-go access'
+                ],
+                solutions: [
+                    'Designed a user-friendly interface with accessibility features',
+                    'Built robust API integrations with major EHR systems',
+                    'Implemented encrypted messaging with audit trails',
+                    'Created a fully responsive design optimized for all devices'
+                ],
+                role: 'Led the user experience design and technical requirements documentation. Conducted stakeholder interviews with both healthcare providers and patients to ensure the platform met all user needs.',
+                timeline: '6 months',
+                teamSize: '8 members',
+                review: {
+                    text: 'Amit\'s understanding of both healthcare workflows and patient needs resulted in a platform that our staff loves to use and our patients find incredibly convenient. Patient satisfaction scores have increased by 35%.',
+                    author: 'Jennifer Williams, Practice Manager'
+                }
+            },
+            'door-systems': {
+                title: 'Door Systems',
+                category: 'Manufacturing',
+                categoryClass: 'manufacturing-tag',
+                url: 'https://www.doorsystems.com/',
+                overview: 'Created an industrial door solutions platform with comprehensive service management, technical specifications database, and B2B ordering system.',
+                problem: 'The client needed a digital platform to showcase their extensive industrial door product line, manage service requests, and streamline B2B sales processes.',
+                challenges: [
+                    'Organizing complex technical specifications for hundreds of products',
+                    'Creating an efficient service request and scheduling system',
+                    'Implementing B2B pricing and ordering workflows',
+                    'Integrating with existing inventory management systems'
+                ],
+                solutions: [
+                    'Developed a sophisticated product catalog with advanced filtering',
+                    'Built an automated service scheduling system with technician dispatch',
+                    'Created custom B2B portals with tiered pricing structures',
+                    'Implemented real-time inventory tracking and availability updates'
+                ],
+                role: 'Coordinated with industrial engineers and sales teams to understand technical requirements and business processes. Managed the entire project lifecycle from concept to deployment.',
+                timeline: '7 months',
+                teamSize: '10 members',
+                review: {
+                    text: 'The platform has revolutionized our B2B sales process. Our customers can now easily find products, get quotes, and schedule service appointments. Sales efficiency has improved by 50%.',
+                    author: 'Robert Martinez, Sales Director'
+                }
+            },
+            '4sale-equipment': {
+                title: '4Sale Heavy Equipment',
+                category: 'Manufacturing',
+                categoryClass: 'manufacturing-tag',
+                url: 'https://www.4saleheavyequipment.com/',
+                overview: 'Built a comprehensive heavy machinery marketplace with advanced inventory management, detailed equipment specifications, and dealer network integration.',
+                problem: 'The client needed a robust marketplace to connect heavy equipment dealers with buyers, featuring detailed equipment information and streamlined transaction processes.',
+                challenges: [
+                    'Managing complex equipment specifications and condition reports',
+                    'Creating a trusted marketplace environment for high-value transactions',
+                    'Implementing dealer verification and rating systems',
+                    'Integrating with multiple dealer inventory management systems'
+                ],
+                solutions: [
+                    'Developed a comprehensive equipment profiling system with photo galleries',
+                    'Built secure transaction workflows with escrow integration',
+                    'Created a robust dealer verification and review system',
+                    'Implemented automated inventory synchronization across dealer networks'
+                ],
+                role: 'Acted as the primary liaison between dealers and development team. Conducted extensive market research to understand buyer and seller needs in the heavy equipment industry.',
+                timeline: '9 months',
+                teamSize: '12 members',
+                review: {
+                    text: 'Amit delivered a marketplace that perfectly understands our industry. The platform has increased our equipment visibility and sales conversion rates significantly.',
+                    author: 'Dave Thompson, Equipment Dealer'
+                }
+            },
+            'aeris-compressor': {
+                title: 'Aeris Compressor Parts',
+                category: 'Manufacturing',
+                categoryClass: 'manufacturing-tag',
+                url: 'https://aeriscompressorparts.com/',
+                overview: 'Developed a specialized industrial parts catalog and ordering system with comprehensive technical documentation and compatibility matching.',
+                problem: 'The client needed a platform to help customers find the right compressor parts quickly, with detailed technical specifications and compatibility information.',
+                challenges: [
+                    'Creating accurate part compatibility matching systems',
+                    'Organizing thousands of technical specifications and documentation',
+                    'Implementing efficient search and filtering mechanisms',
+                    'Integrating with supplier inventory and pricing systems'
+                ],
+                solutions: [
+                    'Built an intelligent part matching system using equipment model data',
+                    'Created a comprehensive technical documentation library',
+                    'Implemented advanced search with visual and technical filters',
+                    'Developed automated pricing and availability updates from suppliers'
+                ],
+                role: 'Worked closely with technical engineers to understand part specifications and customer search behaviors. Led the UX design process to create an intuitive parts discovery experience.',
+                timeline: '5 months',
+                teamSize: '7 members',
+                review: {
+                    text: 'The platform has made finding the right parts so much easier for our customers. Order accuracy has improved by 60% and customer satisfaction is at an all-time high.',
+                    author: 'Lisa Chen, Operations Manager'
+                }
+            },
+            'hellio-energy': {
+                title: 'Hellio Energy Ecosystem',
+                category: 'Energy',
+                categoryClass: 'energy-tag',
+                url: 'https://www.hellio.com/',
+                overview: 'Developed a comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.',
+                problem: 'The client needed an integrated platform to manage various energy efficiency programs while providing different interfaces for different stakeholder groups.',
+                challenges: [
+                    'Managing multiple program types with different eligibility criteria',
+                    'Creating interfaces for diverse user groups (homeowners, corporations, professionals)',
+                    'Implementing complex energy efficiency calculations and reporting',
+                    'Integrating with government incentive programs and certification systems'
+                ],
+                solutions: [
+                    'Developed a modular platform architecture supporting multiple program types',
+                    'Created role-based dashboards for different stakeholder groups',
+                    'Built automated energy savings calculations and ROI analysis tools',
+                    'Implemented seamless integration with government incentive databases'
+                ],
+                role: 'Led the strategic planning and requirements gathering for this complex multi-stakeholder platform. Coordinated with energy consultants, government liaisons, and various user groups.',
+                timeline: '12 months',
+                teamSize: '18 members',
+                review: {
+                    text: 'Amit managed the complexity of our multi-program ecosystem brilliantly. The platform has streamlined our operations and improved our program delivery efficiency across all sectors.',
+                    author: 'Marie Dubois, Program Director'
+                }
+            },
+            'akea-energies': {
+                title: 'Akea Energies',
+                category: 'Energy',
+                categoryClass: 'energy-tag',
+                url: 'https://www.akea-energies.com/',
+                overview: 'Created a renewable energy consultation platform with comprehensive project planning tools, energy auditing capabilities, and sustainability reporting.',
+                problem: 'The client needed a platform to streamline their renewable energy consultation process, from initial assessment to project implementation and ongoing monitoring.',
+                challenges: [
+                    'Creating accurate energy consumption analysis and projection tools',
+                    'Implementing complex renewable energy system sizing calculations',
+                    'Integrating with various monitoring and measurement devices',
+                    'Developing comprehensive sustainability reporting dashboards'
+                ],
+                solutions: [
+                    'Built sophisticated energy modeling and analysis tools',
+                    'Created automated system sizing and configuration recommendations',
+                    'Implemented IoT device integration for real-time monitoring',
+                    'Developed comprehensive sustainability metrics and reporting'
+                ],
+                role: 'Coordinated with renewable energy engineers and sustainability consultants to translate complex technical processes into user-friendly digital workflows.',
+                timeline: '8 months',
+                teamSize: '11 members',
+                review: {
+                    text: 'The platform has transformed how we deliver energy consulting services. Our clients love the detailed analysis and clear recommendations. Project success rates have improved dramatically.',
+                    author: 'Pierre Leblanc, Energy Consultant'
+                }
+            },
+            'mj-wholesale': {
+                title: 'MJ Wholesale',
+                category: 'E-commerce',
+                categoryClass: 'ecommerce-tag',
+                url: 'https://mjwholesale.com/',
+                overview: 'Developed a comprehensive multi-vendor wholesale distribution platform with sophisticated inventory management, bulk pricing structures, and B2B customer portal.',
+                problem: 'The client needed a robust B2B e-commerce platform to manage wholesale operations across multiple vendors with complex pricing tiers and inventory synchronization.',
+                challenges: [
+                    'Managing complex multi-tier pricing structures for different customer levels',
+                    'Synchronizing inventory across multiple vendors and warehouses',
+                    'Implementing bulk order processing and fulfillment workflows',
+                    'Creating intuitive B2B customer dashboards with order history and analytics'
+                ],
+                solutions: [
+                    'Built a flexible pricing engine supporting multiple pricing tiers and volume discounts',
+                    'Implemented real-time inventory synchronization across all vendors',
+                    'Created streamlined bulk order processing with automated routing',
+                    'Developed comprehensive B2B customer portals with detailed analytics'
+                ],
+                role: 'Led the business analysis and requirement gathering process with wholesale buyers and vendors. Designed the complex pricing logic and inventory management workflows.',
+                timeline: '10 months',
+                teamSize: '14 members',
+                review: {
+                    text: 'Amit delivered a platform that perfectly understands the wholesale industry. Our vendors love the ease of use and our customers appreciate the transparent pricing and efficient ordering process.',
+                    author: 'Michael Johnson, Wholesale Operations Director'
+                }
+            },
+            'beast-branding': {
+                title: 'Beast Branding',
+                category: 'E-commerce',
+                categoryClass: 'ecommerce-tag',
+                url: 'https://beastbranding.com/',
+                overview: 'Built a custom merchandise and branding solutions platform with integrated design tools, product customization capabilities, and streamlined fulfillment processes.',
+                problem: 'The client needed a platform that would allow customers to create custom branded merchandise while managing complex production workflows and quality control processes.',
+                challenges: [
+                    'Creating intuitive design tools for non-designers',
+                    'Managing complex production workflows with multiple customization options',
+                    'Implementing quality control checkpoints and approval processes',
+                    'Integrating with multiple production partners and fulfillment centers'
+                ],
+                solutions: [
+                    'Developed user-friendly design tools with templates and asset libraries',
+                    'Built automated production workflow management with status tracking',
+                    'Created digital proofing and approval systems with client feedback loops',
+                    'Implemented seamless integration with production partners and shipping providers'
+                ],
+                role: 'Worked closely with designers and production managers to understand the custom merchandise workflow. Led the UX design process to create intuitive design tools for customers.',
+                timeline: '7 months',
+                teamSize: '9 members',
+                review: {
+                    text: 'The platform has revolutionized our custom branding process. Customers can now create professional designs easily, and our production workflow is more efficient than ever.',
+                    author: 'Sarah Davis, Creative Director'
+                }
+            },
+            'mail-manager': {
+                title: 'Mail Manager',
+                category: 'Technology',
+                categoryClass: 'technology-tag',
+                url: 'https://www.mailmanager.com/',
+                overview: 'Developed an advanced email management and organization platform with intelligent sorting, team collaboration tools, and productivity enhancement features.',
+                problem: 'The client needed a sophisticated email management solution that could handle high-volume email processing while providing advanced organization and collaboration features.',
+                challenges: [
+                    'Implementing intelligent email sorting and categorization algorithms',
+                    'Creating seamless integration with major email providers',
+                    'Building collaborative features for team email management',
+                    'Ensuring enterprise-level security and compliance'
+                ],
+                solutions: [
+                    'Built AI-powered email classification and priority scoring systems',
+                    'Developed robust API integrations with all major email providers',
+                    'Created collaborative workspaces with shared email management',
+                    'Implemented enterprise security features with audit trails'
+                ],
+                role: 'Led the product strategy and feature prioritization process. Conducted extensive user research with email power users to understand pain points and workflow requirements.',
+                timeline: '9 months',
+                teamSize: '13 members',
+                review: {
+                    text: 'Amit\'s deep understanding of email workflow challenges resulted in a platform that has significantly improved our team\'s email productivity. The intelligent sorting alone saves us hours each week.',
+                    author: 'James Wilson, IT Director'
+                }
+            },
+            'nexford-university': {
+                title: 'Nexford University',
+                category: 'Technology',
+                categoryClass: 'technology-tag',
+                url: 'https://nexford.edu/',
+                overview: 'Created a comprehensive educational technology platform with learning management system, student progress tracking, and interactive course delivery mechanisms.',
+                problem: 'The university needed a modern LMS platform that could support diverse learning styles while providing detailed analytics and progress tracking for both students and instructors.',
+                challenges: [
+                    'Creating engaging interactive course content delivery systems',
+                    'Implementing comprehensive student progress tracking and analytics',
+                    'Building scalable assessment and grading workflows',
+                    'Integrating with various educational tools and content providers'
+                ],
+                solutions: [
+                    'Developed multimedia course content delivery with adaptive learning paths',
+                    'Built comprehensive learning analytics dashboards for students and instructors',
+                    'Created automated assessment and grading systems with plagiarism detection',
+                    'Implemented seamless integration with educational tools and content libraries'
+                ],
+                role: 'Collaborated with education professionals and instructional designers to understand learning workflows. Led the technical requirements analysis and platform architecture design.',
+                timeline: '11 months',
+                teamSize: '16 members',
+                review: {
+                    text: 'The platform Amit delivered has transformed our online education delivery. Student engagement has increased significantly, and our instructors love the detailed analytics and easy course management.',
+                    author: 'Dr. Emily Rodriguez, Academic Director'
+                }
+            },
+            'focus-cfo': {
+                title: 'FocusCFO',
+                category: 'Financial',
+                categoryClass: 'financial-tag',
+                url: 'https://www.focuscfo.com/',
+                overview: 'Built a comprehensive financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities.',
+                problem: 'The client needed a platform to streamline their CFO consulting services, providing clients with real-time financial insights and strategic planning tools.',
+                challenges: [
+                    'Creating secure integrations with various accounting and financial systems',
+                    'Building intuitive financial dashboards for non-financial executives',
+                    'Implementing complex financial modeling and forecasting tools',
+                    'Ensuring bank-level security for sensitive financial data'
+                ],
+                solutions: [
+                    'Developed secure API integrations with major accounting platforms',
+                    'Created executive-friendly financial dashboards with key performance indicators',
+                    'Built sophisticated financial modeling tools with scenario planning',
+                    'Implemented enterprise-grade security with multi-factor authentication'
+                ],
+                role: 'Worked closely with CFOs and financial analysts to understand consulting workflows and client reporting needs. Led the security requirements analysis and compliance planning.',
+                timeline: '8 months',
+                teamSize: '12 members',
+                review: {
+                    text: 'The platform has elevated our CFO consulting services significantly. Our clients appreciate the real-time insights and professional reporting capabilities. It\'s become a key differentiator for our firm.',
+                    author: 'David Park, Senior Partner'
+                }
+            },
+            'tax-advisory': {
+                title: 'Tax Advisory Partnership',
+                category: 'Financial',
+                categoryClass: 'financial-tag',
+                url: 'https://www.taxadvisorypartnership.com/',
+                overview: 'Developed a comprehensive tax consultation and compliance platform with automated workflows, document management, and client communication tools.',
+                problem: 'The firm needed a digital platform to manage complex tax consulting processes, document workflows, and client communications while ensuring compliance with tax regulations.',
+                challenges: [
+                    'Managing complex tax document workflows and approval processes',
+                    'Creating secure client portals for sensitive tax information',
+                    'Implementing automated compliance checking and alert systems',
+                    'Integrating with tax preparation software and IRS systems'
+                ],
+                solutions: [
+                    'Built sophisticated document workflow management with approval routing',
+                    'Created secure client portals with encrypted document sharing',
+                    'Developed automated compliance monitoring with real-time alerts',
+                    'Implemented seamless integration with major tax preparation platforms'
+                ],
+                role: 'Coordinated with tax professionals and compliance experts to understand regulatory requirements and client service workflows. Led the document management system design.',
+                timeline: '6 months',
+                teamSize: '8 members',
+                review: {
+                    text: 'Amit\'s platform has streamlined our entire tax consulting process. The automated workflows and compliance monitoring have improved our efficiency and reduced errors significantly.',
+                    author: 'Patricia Smith, Tax Director'
+                }
+            }
+        };
+
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            const modalBody = document.getElementById('modalBody');
+            const modalProjectLink = document.getElementById('modalProjectLink');
+
+            modalTitle.textContent = project.title;
+            modalCategory.textContent = project.category;
+            modalCategory.className = `modal-category ${project.categoryClass}`;
+            modalProjectLink.href = project.url;
+
+            modalBody.innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">📋</span>Project Overview</h3>
+                    <p>${project.overview}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">🎯</span>Problem Statement</h3>
+                    <p>${project.problem}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">⚡</span>Key Challenges</h3>
+                    <ul>
+                        ${project.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">💡</span>Solutions Implemented</h3>
+                    <ul>
+                        ${project.solutions.map(solution => `<li>${solution}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">👨‍💼</span>My Role</h3>
+                    <p>${project.role}</p>
+                    <p><strong>Timeline:</strong> ${project.timeline} | <strong>Team Size:</strong> ${project.teamSize}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3><span class="modal-section-icon">⭐</span>Client Feedback</h3>
+                    <div class="customer-review">
+                        <p>${project.review.text}</p>
+                        <div class="customer-info">— ${project.review.author}</div>
+                    </div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
