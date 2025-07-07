@@ -129,7 +129,7 @@ a:hover {
             gap: 25px;
         }
 
-        .projects-card {
+        .project-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
@@ -140,12 +140,12 @@ a:hover {
             position: relative;
         }
 
-        .projects-card:hover {
+        .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .projects-card::after {
+        .project-card::after {
             content: "Click to view details";
             position: absolute;
             top: 10px;
@@ -159,31 +159,31 @@ a:hover {
             transition: opacity 0.3s ease;
         }
 
-        .projects-card:hover::after {
+        .project-card:hover::after {
             opacity: 1;
         }
 
-        .projects-card.healthcare {
+        .project-card.healthcare {
             border-left-color: #e74c3c;
         }
 
-        .projects-card.manufacturing {
+        .project-card.manufacturing {
             border-left-color: #f39c12;
         }
 
-        .projects-card.energy {
+        .project-card.energy {
             border-left-color: #27ae60;
         }
 
-        .projects-card.ecommerce {
+        .project-card.ecommerce {
             border-left-color: #9b59b6;
         }
 
-        .projects-card.technology {
+        .project-card.technology {
             border-left-color: #3498db;
         }
 
-        .projects-card.financial {
+        .project-card.financial {
             border-left-color: #34495e;
         }
 
@@ -541,13 +541,15 @@ a:hover {
             <h2>Project Portfolio</h2>
             
             <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <div class="filter-buttons" id="filterButtons"></div>
+
+                <!-- <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
                 <button class="filter-btn" onclick="filterProjects('healthcare')">Healthcare</button>
                 <button class="filter-btn" onclick="filterProjects('manufacturing')">Manufacturing</button>
                 <button class="filter-btn" onclick="filterProjects('energy')">Energy</button>
                 <button class="filter-btn" onclick="filterProjects('ecommerce')">E-commerce</button>
                 <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
-                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button>
+                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button> -->
                 </div>
                 <div class="projects-grid" id="projectsGrid"></div>
                 <div style="text-align: center; margin-top: 40px;">
@@ -626,9 +628,39 @@ a:hover {
       });
     }
 
+    function renderFilterButtons(projects) {
+  const container = document.getElementById('filterButtons');
+  container.innerHTML = '';
+
+  // Collect unique categories
+  const categories = [...new Set(projects.map(p => p.category))].filter(Boolean);
+
+  // Create "All" button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = 'All Projects';
+  allBtn.onclick = () => filterProjects('all');
+  container.appendChild(allBtn);
+
+  // Create buttons for each unique category
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = cat;
+    btn.onclick = () => filterProjects(cat.toLowerCase());
+    container.appendChild(btn);
+  });
+}
+
+
     function renderCard(project) {
       const div = document.createElement('div');
-      div.className = 'projects-card';
+      // Normalize category for class name (e.g. "Health Care" -> "health-care")
+  const categoryClass = project.category
+    ? project.category.toLowerCase().trim().replace(/\s+/g, '-')
+    : 'uncategorized';
+
+  div.className = `project-card ${categoryClass}`;
       div.innerHTML = `
   <div class="project-category">${project.category || 'General'}</div>
   <h3>${project.title || 'Untitled Project'}</h3>
@@ -687,15 +719,16 @@ a:hover {
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    allProjects = await fetchProjects();
-    renderVisibleProjects();
+  allProjects = await fetchProjects();
+  renderFilterButtons(allProjects);   // ✅ add this
+  renderVisibleProjects();
 
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    loadMoreBtn.addEventListener('click', () => {
-      visibleCount += 6;
-      renderVisibleProjects();
-    });
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    visibleCount += 6;
+    renderVisibleProjects();
   });
+});
+
   </script>
 
         <!-- Skills Section -->
@@ -762,24 +795,44 @@ a:hover {
         // Project data with detailed information
         
 
+        // function filterProjects(category) {
+        //     const cards = document.querySelectorAll('.project-card');
+        //     const buttons = document.querySelectorAll('.filter-btn');
+            
+        //     // Update active button
+        //     buttons.forEach(btn => btn.classList.remove('active'));
+        //     event.target.classList.add('active');
+            
+        //     // Filter cards
+        //     cards.forEach(card => {
+        //         if (category === 'all' || card.classList.contains(category)) {
+        //             card.style.display = 'block';
+        //             card.style.animation = 'fadeIn 0.5s ease-in';
+        //         } else {
+        //             card.style.display = 'none';
+        //         }
+        //     });
+        // }
+
+        // New filtering
         function filterProjects(category) {
-            const cards = document.querySelectorAll('.projects-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+  const cards = document.querySelectorAll('.project-card');
+  const buttons = document.querySelectorAll('.filter-btn');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase() === (category === 'all' ? 'all projects' : category));
+  if (activeBtn) activeBtn.classList.add('active');
+
+  cards.forEach(card => {
+    const cardCategory = card.className.split(' ').find(cls => cls !== 'project-card');
+    if (category === 'all' || cardCategory === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
 
         
 
