@@ -572,6 +572,7 @@ a:hover {
   display: flex;
   gap: 20px;
   transition: transform 0.4s ease;
+  will-change: transform;
   padding: 10px 0;
 }
 
@@ -616,14 +617,14 @@ a:hover {
   text-decoration: none;
 }
 
-.featured-arrows {
+.featured-arrowss {
   display: flex;
   justify-content: center;
   margin-top: 15px;
   gap: 10px;
 }
 
-.featured-arrow {
+.featured-arrows {
   background: #667eea;
   color: #fff;
   border: none;
@@ -635,16 +636,16 @@ a:hover {
   transition: background 0.3s ease;
 }
 
-.featured-arrow:hover {
+.featured-arrows:hover {
   background: #4b5cd2;
 }
 
 
-.featured-arrow.prev {
+.featured-arrows.prev {
   left: 45%;
 }
 
-.featured-arrow.next {
+.featured-arrows.next {
   right: 45%;
 }
 
@@ -698,6 +699,25 @@ a:hover {
   }
 }
 
+button.featured-arrows:disabled,
+.button.featured-arrows.disabled {
+  opacity: 0.5;
+  background: #667eea;
+  cursor: not-allowed;
+  color: #ffffff;
+  
+}
+
+.featured-arrow:disabled:hover {
+  background: inherit;
+  color: inherit;
+  cursor: not-allowed;
+  opacity: inherit;
+  /* Optional: remove box-shadow or effects too */
+  box-shadow: none;
+  transform: none;
+}
+
 
     </style>
 </head>
@@ -733,7 +753,7 @@ a:hover {
 
         </div>
 
-        <section class="featured-projects">
+        <div class="featured-projects">
   <h2>🌟 Featured Projects</h2>
 
   <!-- Loader -->
@@ -747,13 +767,13 @@ a:hover {
   <!-- Slider -->
   <div class="featured-wrapper" style="display: none;">
   <div class="featured-track" id="featuredTrack"></div>
-  <div class="featured-arrows">
-    <button class="featured-arrow prev">‹</button>
-    <button class="featured-arrow next">›</button>
+  <div class="featured-arrowss">
+    <button class="featured-arrows prev">‹</button>
+    <button class="featured-arrows next">›</button>
   </div>
 </div>
 
-</section>
+</div>
 
 
         <!-- Projects Section -->
@@ -884,25 +904,63 @@ function renderFeaturedSlider(projects) {
       track.appendChild(div);
     });
 
-    let position = 0;
     const cards = document.querySelectorAll('.featured-card');
-    const cardWidth = cards[0]?.offsetWidth + 20 || 0;
-    const maxScroll = Math.max(0, cards.length - 3);
+    if (!cards.length) return;
 
-    document.querySelector('.featured-arrow.prev').addEventListener('click', () => {
-      if (position > 0) position--;
-      track.style.transform = `translateX(-${position * cardWidth}px)`;
-    });
+    const prevBtn = document.querySelector('.featured-arrows.prev');
+    const nextBtn = document.querySelector('.featured-arrows.next');
 
-    document.querySelector('.featured-arrow.next').addEventListener('click', () => {
-      if (position < maxScroll) position++;
-      track.style.transform = `translateX(-${position * cardWidth}px)`;
-    });
+    let position = 0;
+
+    function getCardInfo() {
+      const card = cards[0];
+      const cardStyle = window.getComputedStyle(card);
+      const marginRight = parseFloat(cardStyle.marginRight) || 20;
+      const cardWidth = card.offsetWidth + marginRight;
+      const wrapperWidth = wrapper.offsetWidth;
+      const cardsPerSlide = Math.floor(wrapperWidth / cardWidth);
+      const maxPosition = Math.max(0, Math.ceil(cards.length / cardsPerSlide) - 1);
+      return { cardWidth, cardsPerSlide, maxPosition };
+    }
+
+    function updateSliderPosition() {
+      const { cardWidth, cardsPerSlide, maxPosition } = getCardInfo();
+      const offset = position * cardsPerSlide * cardWidth;
+      track.style.transform = `translateX(-${offset}px)`;
+
+      // Show/hide arrows
+      // prevBtn.style.display = position > 0 ? 'inline-block' : 'none';
+      // nextBtn.style.display = position < maxPosition ? 'inline-block' : 'none';
+      // Enable/disable arrows instead of hiding
+  prevBtn.disabled = position === 0;
+  nextBtn.disabled = position === maxPosition;
+  // Add disabled class for styling
+  prevBtn.classList.toggle('disabled', position === 0);
+  nextBtn.classList.toggle('disabled', position === maxPosition);
+    }
+
+    prevBtn.onclick = () => {
+      if (position > 0) {
+        position--;
+        updateSliderPosition();
+      }
+    };
+
+    nextBtn.onclick = () => {
+      const { maxPosition } = getCardInfo();
+      if (position < maxPosition) {
+        position++;
+        updateSliderPosition();
+      }
+    };
+
+    updateSliderPosition();
 
     loader.style.display = 'none';
     wrapper.style.display = 'block';
-  }, 300); // optional delay
+  }, 300);
 }
+
 
 
     function renderFilterButtons(projects) {
