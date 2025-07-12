@@ -502,6 +502,53 @@ a:hover {
                 padding: 20px;
             }
         }
+        @keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.modern-loader {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #667eea;
+}
+
+.modern-loader .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background-color: #667eea;
+  border-radius: 50%;
+  animation: pulse 1s infinite ease-in-out;
+}
+
+.modern-loader .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.modern-loader .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.modern-loader p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #555;
+  opacity: 0.8;
+}
+
+
     </style>
 </head>
 <body>
@@ -551,7 +598,16 @@ a:hover {
                 <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
                 <button class="filter-btn" onclick="filterProjects('financial')">Financial</button> -->
                 </div>
+<div id="loader" class="modern-loader">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <p>Loading projects...</p>
+</div>
+
                 <div class="projects-grid" id="projectsGrid"></div>
+                
+
                 <div style="text-align: center; margin-top: 40px;">
   <button id="loadMoreBtn" class="load-more-btn">
     Load More
@@ -707,7 +763,7 @@ let activeCategory = 'all'; // 🆕 Track the current filter
     document.addEventListener('DOMContentLoaded', async () => {
       const projects = await fetchProjects();
       const grid = document.getElementById('projectsGrid');
-      projects.forEach(p => grid.appendChild(renderCard(p)));
+      // projects.forEach(p => grid.appendChild(renderCard(p)));
     });
     
 // Render visible projects
@@ -743,15 +799,29 @@ let activeCategory = 'all'; // 🆕 Track the current filter
 
 
   document.addEventListener('DOMContentLoaded', async () => {
-  allProjects = await fetchProjects();
-  renderFilterButtons(allProjects);   // ✅ add this
-  renderVisibleProjects();
+  const loader = document.getElementById('loader');
+  const grid = document.getElementById('projectsGrid');
+
+  loader.style.display = 'block';  // Show loader
+  grid.style.display = 'none';     // Hide grid during load
+
+  try {
+    allProjects = await fetchProjects();
+    renderFilterButtons(allProjects);
+    renderVisibleProjects();
+  } catch (err) {
+    alert("Failed to fetch projects from Airtable.");
+  } finally {
+    loader.style.display = 'none'; // Hide loader
+    grid.style.display = 'grid';   // Show grid again
+  }
 
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
     visibleCount += 6;
     renderVisibleProjects();
   });
 });
+
 
   </script>
 
