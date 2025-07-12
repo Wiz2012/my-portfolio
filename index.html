@@ -18,8 +18,12 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-
-        .container {
+        a {color: #ffffff; text-decoration: none;   transition: all 0.3s ease;}
+}
+a:hover {
+  color: #667eea; /* Or any hover color */
+  text-decoration: underline; /* Optional */
+}        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -132,11 +136,31 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card::after {
+            content: "Click to view details";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
         }
 
         .project-card.healthcare {
@@ -210,6 +234,184 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section-icon {
+            font-size: 1.2rem;
+        }
+
+        .modal-section p, .modal-section ul {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .modal-section ul {
+            padding-left: 20px;
+        }
+
+        .modal-section li {
+            margin-bottom: 8px;
+        }
+
+        .customer-review {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-style: italic;
+            position: relative;
+        }
+
+        .customer-review::before {
+            content: '"';
+            font-size: 3rem;
+            color: #667eea;
+            position: absolute;
+            top: -5px;
+            left: 15px;
+        }
+
+        .customer-info {
+            margin-top: 15px;
+            font-style: normal;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .visit-project-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .visit-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+.load-more-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover effect */
+.load-more-btn:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Gradient border */
+  border-image: linear-gradient(135deg, #667eea, #764ba2);
+  border-image-slice: 1;
+
+  /* Elevate effect */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.load-more-btn:hover::before {
+  border-radius: 8px;
+}
 
         .skills-section {
             display: grid;
@@ -290,35 +492,95 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .modal-header, .modal-body {
+                padding: 20px;
+            }
         }
+        @keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.modern-loader {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #667eea;
+}
+
+.modern-loader .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background-color: #667eea;
+  border-radius: 50%;
+  animation: pulse 1s infinite ease-in-out;
+}
+
+.modern-loader .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.modern-loader .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.modern-loader p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #555;
+  opacity: 0.8;
+}
+
+
     </style>
 </head>
 <body>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <div class="container">
         <!-- Header Section -->
         <div class="header">
             <h1>Amit Solanki</h1>
             <div class="subtitle">Project Coordinator & Post-Sales Business Analyst</div>
             <p style="color: #7f8c8d; margin: 20px 0;">Transforming client requirements into digital solutions across diverse industries</p>
-            
             <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">90+</div>
-                    <div class="stat-label">Projects Delivered</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">4+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Industries</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Client Satisfaction</div>
-                </div>
+                    <div class="stat-item">
+                      <div class="stat-number counter" data-target="90">0</div>
+                      <div class="stat-label">Projects Delivered</div>
+                    </div>
+
+                    <div class="stat-item">
+                      <div class="stat-number" data-target="4">4+</div>
+                      <div class="stat-label">Years Experience</div>
+                    </div>
+
+                    <div class="stat-item">
+                      <div class="stat-number counter" data-target="12">0</div>
+                      <div class="stat-label">Industries</div>
+                    </div>
+
+                    <div class="stat-item">
+                      <div class="stat-number counter" data-target="98">0</div>
+                      <div class="stat-label">Client Satisfaction</div>
+                    </div>
             </div>
+
         </div>
 
         <!-- Projects Section -->
@@ -326,149 +588,242 @@
             <h2>Project Portfolio</h2>
             
             <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <div class="filter-buttons" id="filterButtons"></div>
+
+                <!-- <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
                 <button class="filter-btn" onclick="filterProjects('healthcare')">Healthcare</button>
                 <button class="filter-btn" onclick="filterProjects('manufacturing')">Manufacturing</button>
                 <button class="filter-btn" onclick="filterProjects('energy')">Energy</button>
                 <button class="filter-btn" onclick="filterProjects('ecommerce')">E-commerce</button>
                 <button class="filter-btn" onclick="filterProjects('technology')">Technology</button>
-                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button>
-            </div>
-
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Healthcare Projects -->
-                <div class="project-card healthcare">
-                    <div class="project-title">Octapharma Plasma</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Comprehensive plasma donation management platform with patient scheduling, donor tracking, and compliance reporting. Implemented HIPAA-compliant workflows and multi-location coordination.
-                    </div>
-                    <a href="https://www.octapharmaplasma.com/" class="project-link" target="_blank">View Project</a>
+                <button class="filter-btn" onclick="filterProjects('financial')">Financial</button> -->
                 </div>
+<div id="loader" class="modern-loader">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <p>Loading projects...</p>
+</div>
 
-                <div class="project-card healthcare">
-                    <div class="project-title">Advanced Reconstruction Institute</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Multi-site medical practice platform with specialized divisions including Hand & Upper Extremity, Florida operations, Breast Center NJ, and Premier Surgical Network integration.
-                    </div>
-                    <a href="https://www.advancedreconstruction.com/" class="project-link" target="_blank">View Project</a>
-                </div>
+                <div class="projects-grid" id="projectsGrid"></div>
+                
 
-                <div class="project-card healthcare">
-                    <div class="project-title">Ridgeline Health Group</div>
-                    <span class="project-category healthcare-tag">Healthcare</span>
-                    <div class="project-description">
-                        Healthcare provider platform featuring patient portal integration, appointment scheduling, and medical records management with seamless provider-patient communication.
-                    </div>
-                    <a href="https://www.ridgelinehealthgroup.com/" class="project-link" target="_blank">View Project</a>
-                </div>
+                <div style="text-align: center; margin-top: 40px;">
+  <button id="loadMoreBtn" class="load-more-btn">
+    Load More
+  </button>
+</div>
 
-                <!-- Manufacturing Projects -->
-                <div class="project-card manufacturing">
-                    <div class="project-title">Door Systems</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Industrial door solutions platform with service management, technical specifications database, and B2B ordering system for commercial and industrial applications.
-                    </div>
-                    <a href="https://www.doorsystems.com/" class="project-link" target="_blank">View Project</a>
-                </div>
 
-                <div class="project-card manufacturing">
-                    <div class="project-title">4Sale Heavy Equipment</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Heavy machinery marketplace with advanced inventory management, equipment specifications, and dealer network integration for construction and industrial equipment.
-                    </div>
-                    <a href="https://www.4saleheavyequipment.com/" class="project-link" target="_blank">View Project</a>
-                </div>
 
-                <div class="project-card manufacturing">
-                    <div class="project-title">Aeris Compressor Parts</div>
-                    <span class="project-category manufacturing-tag">Manufacturing</span>
-                    <div class="project-description">
-                        Specialized industrial parts catalog and ordering system with technical documentation, compatibility matching, and supply chain integration.
-                    </div>
-                    <a href="https://aeriscompressorparts.com/" class="project-link" target="_blank">View Project</a>
-                </div>
+            
 
-                <!-- Energy Projects -->
-                <div class="project-card energy">
-                    <div class="project-title">Hellio Energy Ecosystem</div>
-                    <span class="project-category energy-tag">Energy</span>
-                    <div class="project-description">
-                        Comprehensive multi-platform energy efficiency ecosystem including corporate solutions, co-ownership programs, social housing initiatives, and professional services.
-                    </div>
-                    <a href="https://www.hellio.com/" class="project-link" target="_blank">View Project</a>
-                </div>
+            
+        </div>
 
-                <div class="project-card energy">
-                    <div class="project-title">Akea Energies</div>
-                    <span class="project-category energy-tag">Energy</span>
-                    <div class="project-description">
-                        Renewable energy consultation platform with project planning tools, energy auditing capabilities, and sustainability reporting for commercial and residential clients.
-                    </div>
-                    <a href="https://www.akea-energies.com/" class="project-link" target="_blank">View Project</a>
+        <!-- Modal -->
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div class="modal-title" id="modalTitle"></div>
+                    <span class="modal-category" id="modalCategory"></span>
+                    <img id="modalImage" style="width: 100%; border-radius: 8px;" />
                 </div>
+               <div class="modal-body">
+  <div class="modal-section"><h3>Summary</h3><p id="modalDescription"></p><p id="modalAbout"></p></div>
+  <div class="modal-section"><h3>Challenges</h3><p id="modalChallenges"></p></div>
+  <div class="modal-section"><h3>Solutions</h3><p id="modalSolutions"></p></div>
+  <div class="modal-section"><h3>Duration</h3><p id="modalDuration"></p></div>
+  <div class="modal-section"><h3>Contribution</h3><p id="modalContribution"></p></div>
+  <!-- <div class="modal-section"><h3>Technologies</h3><p id="modalTechnologies"></p></div> -->
+  
+</div>
 
-                <!-- E-commerce Projects -->
-                <div class="project-card ecommerce">
-                    <div class="project-title">MJ Wholesale</div>
-                    <span class="project-category ecommerce-tag">E-commerce</span>
-                    <div class="project-description">
-                        Multi-vendor wholesale distribution platform with inventory management, bulk pricing structures, and B2B customer portal for efficient order processing.
-                    </div>
-                    <a href="https://mjwholesale.com/" class="project-link" target="_blank">View Project</a>
+                 <div class="modal-footer">
+                    <a href="modalProjectLink" class="visit-project-btn" id="modalProjectLink" target="_blank">Visit Live Project</a>
                 </div>
+                <span id="modalClose">×</span>
 
-                <div class="project-card ecommerce">
-                    <div class="project-title">Beast Branding</div>
-                    <span class="project-category ecommerce-tag">E-commerce</span>
-                    <div class="project-description">
-                        Custom merchandise and branding solutions platform with design tools, product customization, and fulfillment integration for businesses and individuals.
-                    </div>
-                    <a href="https://beastbranding.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Technology Projects -->
-                <div class="project-card technology">
-                    <div class="project-title">Mail Manager</div>
-                    <span class="project-category technology-tag">Technology</span>
-                    <div class="project-description">
-                        Advanced email management and organization platform with intelligent sorting, collaboration tools, and productivity features for professional communication.
-                    </div>
-                    <a href="https://www.mailmanager.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card technology">
-                    <div class="project-title">Nexford University</div>
-                    <span class="project-category technology-tag">Technology</span>
-                    <div class="project-description">
-                        Educational technology platform with learning management system, student tracking, and interactive course delivery for online higher education.
-                    </div>
-                    <a href="https://nexford.edu/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <!-- Financial Projects -->
-                <div class="project-card financial">
-                    <div class="project-title">FocusCFO</div>
-                    <span class="project-category financial-tag">Financial</span>
-                    <div class="project-description">
-                        Financial consulting and CFO services platform with client dashboards, financial reporting tools, and strategic planning capabilities for growing businesses.
-                    </div>
-                    <a href="https://www.focuscfo.com/" class="project-link" target="_blank">View Project</a>
-                </div>
-
-                <div class="project-card financial">
-                    <div class="project-title">Tax Advisory Partnership</div>
-                    <span class="project-category financial-tag">Financial</span>
-                    <div class="project-description">
-                        Tax consultation and compliance platform with automated workflows, document management, and client communication tools for professional tax services.
-                    </div>
-                    <a href="https://www.taxadvisorypartnership.com/" class="project-link" target="_blank">View Project</a>
-                </div>
             </div>
         </div>
+        <script>
+            let allProjects = [];
+let visibleCount = 6;
+let activeCategory = 'all'; // 🆕 Track the current filter
+
+    const AIRTABLE_CONFIG = {
+      baseId: 'app7912tAjdpdGLv6',
+      tableName: 'Portfolio-Projects',
+      apiKey: 'pat6yR5CxXZKwu8JI.1d412fdc600f8fc25acbeeaf3ce8e77271773925686823cc29cdeea29569b5ff'
+    };
+   
+    async function fetchProjects() { 
+
+      const url = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${encodeURIComponent(AIRTABLE_CONFIG.tableName)}`;
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${AIRTABLE_CONFIG.apiKey}` }
+      });
+      const data = await response.json();
+      
+    console.log("✅ Airtable data:", data);
+      return data.records.map(record => {
+        const f = record.fields;
+        return {
+  title: f["Name"],
+  category: f["Category"],
+  description: f["Description"],
+  about: f["About"],
+  image: Array.isArray(f["Image"]) ? f["Image"][0]?.url : '',
+  link: f["Live Link"],
+  technologies: f["Technologies"],
+  challenges: f["Challenges"],
+  solutions: f["Solutions"],
+  duration: f["Duration"],
+  contribution: f["Contribution"]
+};
+
+      });
+    }
+
+    function renderFilterButtons(projects) {
+  const container = document.getElementById('filterButtons');
+  container.innerHTML = '';
+
+  const categories = [...new Set(projects.map(p => p.category))].filter(Boolean);
+
+  // Sort categories alphabetically
+  categories.sort((a, b) => a.localeCompare(b));
+
+  // Add "All" button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = 'All Projects';
+  allBtn.setAttribute('data-slug', 'all');
+  allBtn.onclick = () => filterProjects('all');
+  container.appendChild(allBtn);
+
+  // Add other category buttons
+  categories.forEach(cat => {
+    const slug = cat.toLowerCase().trim().replace(/\s+/g, '-');
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = cat;
+    btn.setAttribute('data-slug', slug);
+    btn.onclick = () => filterProjects(slug);
+    container.appendChild(btn);
+  });
+}
+
+
+
+    function renderCard(project) {
+  const div = document.createElement('div');
+  const categorySlug = (project.category || '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-');
+
+  div.className = `project-card ${categorySlug}`;
+  div.setAttribute('data-category', categorySlug); // for filtering
+
+  div.innerHTML = `
+    <div class="project-category">${project.category || 'General'}</div>
+    <h3>${project.title || 'Untitled Project'}</h3>
+    <p>${project.description || ''}</p>
+  `;
+  div.onclick = () => openModal(project);
+  return div;
+}
+
+
+    function openModal(project) {
+      document.getElementById('modalTitle').textContent = project.title;
+      document.getElementById('modalImage').src = project.image || 'https://placehold.co/600x300?text=No+Image';
+      document.getElementById('modalDescription').textContent = project.description || '';
+      document.getElementById('modalAbout').innerHTML = marked.parse(project.about || '');
+      document.getElementById('modalChallenges').textContent = project.challenges || '';
+      document.getElementById('modalSolutions').textContent = project.solutions || '';
+      document.getElementById('modalDuration').textContent = project.duration || '';
+      document.getElementById('modalContribution').textContent = project.contribution || '';
+      // document.getElementById('modalTechnologies').textContent = project.technologies || '';
+      document.getElementById('modalProjectLink').href = project.link || '#';
+      document.getElementById('projectModal').style.display = 'flex';
+    }
+
+    document.getElementById('modalClose').onclick = () => {
+      document.getElementById('projectModal').style.display = 'none';
+    };
+    window.onclick = e => {
+      if (e.target === document.getElementById('projectModal')) {
+        document.getElementById('projectModal').style.display = 'none';
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const projects = await fetchProjects();
+      const grid = document.getElementById('projectsGrid');
+      // projects.forEach(p => grid.appendChild(renderCard(p)));
+    });
+    
+// Render visible projects
+  function renderVisibleProjects() {
+  const grid = document.getElementById('projectsGrid');
+  grid.innerHTML = '';
+
+  // 🔍 Filtered list
+  const filtered = activeCategory === 'all'
+    ? allProjects
+    : allProjects.filter(p =>
+        (p.category || '').toLowerCase().trim().replace(/\s+/g, '-') === activeCategory
+      );
+
+  const visibleProjects = filtered.slice(0, visibleCount);
+
+  visibleProjects.forEach(project => {
+    grid.appendChild(renderCard(project));
+  });
+
+  // 🆕 Update Load More
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const remaining = filtered.length - visibleProjects.length;
+
+  if (remaining <= 0) {
+    loadMoreBtn.style.display = 'none';
+  } else {
+    loadMoreBtn.style.display = 'inline-block';
+    loadMoreBtn.textContent = `Load More (${remaining} remaining)`;
+  }
+}
+
+
+
+  document.addEventListener('DOMContentLoaded', async () => {
+  const loader = document.getElementById('loader');
+  const grid = document.getElementById('projectsGrid');
+
+  loader.style.display = 'block';  // Show loader
+  grid.style.display = 'none';     // Hide grid during load
+
+  try {
+    allProjects = await fetchProjects();
+    renderFilterButtons(allProjects);
+    renderVisibleProjects();
+  } catch (err) {
+    alert("Failed to fetch projects from Airtable.");
+  } finally {
+    loader.style.display = 'none'; // Hide loader
+    grid.style.display = 'grid';   // Show grid again
+  }
+
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    visibleCount += 6;
+    renderVisibleProjects();
+  });
+});
+
+
+  </script>
 
         <!-- Skills Section -->
         <div class="section">
@@ -531,24 +886,65 @@
     </div>
 
     <script>
-        function filterProjects(category) {
-            const cards = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
+        // Project data with detailed information
+        
+
+        // function filterProjects(category) {
+        //     const cards = document.querySelectorAll('.project-card');
+        //     const buttons = document.querySelectorAll('.filter-btn');
             
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        //     // Update active button
+        //     buttons.forEach(btn => btn.classList.remove('active'));
+        //     event.target.classList.add('active');
             
-            // Filter cards
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+        //     // Filter cards
+        //     cards.forEach(card => {
+        //         if (category === 'all' || card.classList.contains(category)) {
+        //             card.style.display = 'block';
+        //             card.style.animation = 'fadeIn 0.5s ease-in';
+        //         } else {
+        //             card.style.display = 'none';
+        //         }
+        //     });
+        // }
+
+        // New filtering
+        function filterProjects(categorySlug) {
+  activeCategory = categorySlug;  // 🆕 store current category
+  visibleCount = 6;               // 🆕 reset on filter
+  renderVisibleProjects();
+
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  const activeBtn = Array.from(buttons).find(b =>
+    b.getAttribute('data-slug') === categorySlug
+  );
+  if (activeBtn) activeBtn.classList.add('active');
+}
+
+
+
+
+        
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
         }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
         
         // Add fade-in animation
         const style = document.createElement('style');
@@ -570,5 +966,37 @@
             });
         });
     </script>
+    <!-- Counter JS !-->
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll(".counter");
+    const duration = 2000; // total duration in ms for all counters (2 seconds)
+    const frameRate = 30; // update every 30ms
+    const totalFrames = duration / frameRate;
+
+    counters.forEach(counter => {
+      const target = +counter.getAttribute("data-target");
+      let frame = 0;
+
+      const increment = target / totalFrames;
+
+      const counterInterval = setInterval(() => {
+        frame++;
+        const value = Math.round(increment * frame);
+        if (frame >= totalFrames) {
+          counter.innerText = target + "+";
+          clearInterval(counterInterval);
+        } else {
+          counter.innerText = value;
+        }
+      }, frameRate);
+    });
+  });
+</script>
+
+
+    
+
+
 </body>
 </html>
