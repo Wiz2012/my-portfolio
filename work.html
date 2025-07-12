@@ -616,9 +616,14 @@ a:hover {
   text-decoration: none;
 }
 
+.featured-arrows {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
 .featured-arrow {
-  position: absolute;
-  bottom: -35px;
   background: #667eea;
   color: #fff;
   border: none;
@@ -633,6 +638,7 @@ a:hover {
 .featured-arrow:hover {
   background: #4b5cd2;
 }
+
 
 .featured-arrow.prev {
   left: 45%;
@@ -740,10 +746,13 @@ a:hover {
 
   <!-- Slider -->
   <div class="featured-wrapper" style="display: none;">
+  <div class="featured-track" id="featuredTrack"></div>
+  <div class="featured-arrows">
     <button class="featured-arrow prev">‹</button>
-    <div class="featured-track" id="featuredTrack"></div>
     <button class="featured-arrow next">›</button>
   </div>
+</div>
+
 </section>
 
 
